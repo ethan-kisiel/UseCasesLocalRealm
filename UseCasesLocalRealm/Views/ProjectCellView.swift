@@ -18,7 +18,7 @@ struct ProjectCellView: View
         {
             NavigationLink("\(project.title)", value: Route.project(project))
             Spacer()
-            Image(systemName: "trash.circle.fill").foregroundColor(trashIsEnabled ? .red: .gray)
+            Image(systemName: TRASH_ICON).foregroundColor(trashIsEnabled ? .red: .gray)
                 .disabled(trashIsEnabled)
                 .onLongPressGesture(minimumDuration: 1)
                 {

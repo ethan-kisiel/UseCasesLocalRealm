@@ -16,8 +16,6 @@ class ProjectManager: ObservableObject
     
     let localRealm = try! Realm()
     
-    @ObservedResults(Project.self) var projects
-    
     func addProject(project: Project) -> Void
     {
         // attempt to locally save given project

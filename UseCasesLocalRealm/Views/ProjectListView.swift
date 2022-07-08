@@ -11,7 +11,6 @@ import SwiftUI
 struct ProjectListView: View {
     @ObservedResults(Project.self) var projects
     var body: some View {
-        
         if projects.isEmpty
         {
             Text("No projects to display")
@@ -26,7 +25,6 @@ struct ProjectListView: View {
                     
                     ProjectCellView(project: project)
                         .navigationDestination(for: Route.self)
-                    
                     { route in
                         switch route
                         {
@@ -35,7 +33,7 @@ struct ProjectListView: View {
                             case .project(let project):
                                 ProjectDetailsView(project: project)
                             case .useCase(let useCase):
-                                Text("use case views")
+                                Text("\(useCase.title)")
                         }
                     }
                 }
@@ -48,10 +46,6 @@ struct ProjectListView: View {
                         ProjectManager.shared.deleteProject(projToDel)
                     }
                 }
-                .onTapGesture
-                {
-                
-                }
             }.listStyle(.plain)
         }
     }
@@ -61,6 +55,6 @@ struct ProjectListView_Previews: PreviewProvider {
 
     static var previews: some View {
         Text("no preview")
-        //ProjectListView(projects: $projects)
+        ProjectListView()
     }
 }
