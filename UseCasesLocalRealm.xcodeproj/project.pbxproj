@@ -11,6 +11,20 @@
 		8805F5F628773B5D000DE99F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8805F5F528773B5D000DE99F /* ContentView.swift */; };
 		8805F5F828773B5E000DE99F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8805F5F728773B5E000DE99F /* Assets.xcassets */; };
 		8805F5FB28773B5E000DE99F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8805F5FA28773B5E000DE99F /* Preview Assets.xcassets */; };
+		8805F60228773C1C000DE99F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8805F60128773C1C000DE99F /* Constants.swift */; };
+		8805F60828773CCE000DE99F /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 8805F60728773CCE000DE99F /* Realm */; };
+		8805F60A28773CCE000DE99F /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 8805F60928773CCE000DE99F /* RealmSwift */; };
+		8805F60C28773D6E000DE99F /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8805F60B28773D6E000DE99F /* Project.swift */; };
+		8805F61028776C69000DE99F /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8805F60F28776C69000DE99F /* MainViewModel.swift */; };
+		8805F61228776F48000DE99F /* LocalRealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8805F61128776F48000DE99F /* LocalRealmManager.swift */; };
+		8805F614287773A9000DE99F /* TextInputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8805F613287773A9000DE99F /* TextInputField.swift */; };
+		8805F6162877746B000DE99F /* TextInputFieldWithFocus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8805F6152877746B000DE99F /* TextInputFieldWithFocus.swift */; };
+		8805F618287775F9000DE99F /* ProjectListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8805F617287775F9000DE99F /* ProjectListView.swift */; };
+		8805F61A2877826C000DE99F /* UseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8805F6192877826C000DE99F /* UseCase.swift */; };
+		8805F61C287793D7000DE99F /* ProjectsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8805F61B287793D7000DE99F /* ProjectsView.swift */; };
+		8805F61F2877DCC8000DE99F /* AddUseCaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8805F61E2877DCC8000DE99F /* AddUseCaseView.swift */; };
+		8805F6212877DF64000DE99F /* ProjectCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8805F6202877DF64000DE99F /* ProjectCellView.swift */; };
+		8805F623287890A8000DE99F /* ProjectDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8805F622287890A8000DE99F /* ProjectDetailsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +33,18 @@
 		8805F5F528773B5D000DE99F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		8805F5F728773B5E000DE99F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8805F5FA28773B5E000DE99F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		8805F60128773C1C000DE99F /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		8805F60B28773D6E000DE99F /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
+		8805F60F28776C69000DE99F /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		8805F61128776F48000DE99F /* LocalRealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalRealmManager.swift; sourceTree = "<group>"; };
+		8805F613287773A9000DE99F /* TextInputField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextInputField.swift; sourceTree = "<group>"; };
+		8805F6152877746B000DE99F /* TextInputFieldWithFocus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextInputFieldWithFocus.swift; sourceTree = "<group>"; };
+		8805F617287775F9000DE99F /* ProjectListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectListView.swift; sourceTree = "<group>"; };
+		8805F6192877826C000DE99F /* UseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseCase.swift; sourceTree = "<group>"; };
+		8805F61B287793D7000DE99F /* ProjectsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectsView.swift; sourceTree = "<group>"; };
+		8805F61E2877DCC8000DE99F /* AddUseCaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddUseCaseView.swift; sourceTree = "<group>"; };
+		8805F6202877DF64000DE99F /* ProjectCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectCellView.swift; sourceTree = "<group>"; };
+		8805F622287890A8000DE99F /* ProjectDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDetailsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -26,6 +52,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8805F60A28773CCE000DE99F /* RealmSwift in Frameworks */,
+				8805F60828773CCE000DE99F /* Realm in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -51,10 +79,17 @@
 		8805F5F228773B5D000DE99F /* UseCasesLocalRealm */ = {
 			isa = PBXGroup;
 			children = (
+				8805F61D2877A89B000DE99F /* RealmManagers */,
+				8805F613287773A9000DE99F /* TextInputField.swift */,
+				8805F60528773C58000DE99F /* DatabaseModels */,
+				8805F60428773C46000DE99F /* ViewModels */,
+				8805F60328773C3D000DE99F /* Views */,
 				8805F5F328773B5D000DE99F /* UseCasesLocalRealmApp.swift */,
 				8805F5F528773B5D000DE99F /* ContentView.swift */,
 				8805F5F728773B5E000DE99F /* Assets.xcassets */,
 				8805F5F928773B5E000DE99F /* Preview Content */,
+				8805F60128773C1C000DE99F /* Constants.swift */,
+				8805F6152877746B000DE99F /* TextInputFieldWithFocus.swift */,
 			);
 			path = UseCasesLocalRealm;
 			sourceTree = "<group>";
@@ -65,6 +100,43 @@
 				8805F5FA28773B5E000DE99F /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		8805F60328773C3D000DE99F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				8805F61B287793D7000DE99F /* ProjectsView.swift */,
+				8805F617287775F9000DE99F /* ProjectListView.swift */,
+				8805F61E2877DCC8000DE99F /* AddUseCaseView.swift */,
+				8805F6202877DF64000DE99F /* ProjectCellView.swift */,
+				8805F622287890A8000DE99F /* ProjectDetailsView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		8805F60428773C46000DE99F /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				8805F60F28776C69000DE99F /* MainViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		8805F60528773C58000DE99F /* DatabaseModels */ = {
+			isa = PBXGroup;
+			children = (
+				8805F60B28773D6E000DE99F /* Project.swift */,
+				8805F6192877826C000DE99F /* UseCase.swift */,
+			);
+			path = DatabaseModels;
+			sourceTree = "<group>";
+		};
+		8805F61D2877A89B000DE99F /* RealmManagers */ = {
+			isa = PBXGroup;
+			children = (
+				8805F61128776F48000DE99F /* LocalRealmManager.swift */,
+			);
+			path = RealmManagers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -83,6 +155,10 @@
 			dependencies = (
 			);
 			name = UseCasesLocalRealm;
+			packageProductDependencies = (
+				8805F60728773CCE000DE99F /* Realm */,
+				8805F60928773CCE000DE99F /* RealmSwift */,
+			);
 			productName = UseCasesLocalRealm;
 			productReference = 8805F5F028773B5D000DE99F /* UseCasesLocalRealm.app */;
 			productType = "com.apple.product-type.application";
@@ -111,6 +187,9 @@
 				Base,
 			);
 			mainGroup = 8805F5E728773B5D000DE99F;
+			packageReferences = (
+				8805F60628773CCE000DE99F /* XCRemoteSwiftPackageReference "realm-swift" */,
+			);
 			productRefGroup = 8805F5F128773B5D000DE99F /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -137,8 +216,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8805F614287773A9000DE99F /* TextInputField.swift in Sources */,
+				8805F61228776F48000DE99F /* LocalRealmManager.swift in Sources */,
 				8805F5F628773B5D000DE99F /* ContentView.swift in Sources */,
 				8805F5F428773B5D000DE99F /* UseCasesLocalRealmApp.swift in Sources */,
+				8805F61A2877826C000DE99F /* UseCase.swift in Sources */,
+				8805F60228773C1C000DE99F /* Constants.swift in Sources */,
+				8805F618287775F9000DE99F /* ProjectListView.swift in Sources */,
+				8805F6162877746B000DE99F /* TextInputFieldWithFocus.swift in Sources */,
+				8805F61F2877DCC8000DE99F /* AddUseCaseView.swift in Sources */,
+				8805F6212877DF64000DE99F /* ProjectCellView.swift in Sources */,
+				8805F60C28773D6E000DE99F /* Project.swift in Sources */,
+				8805F61C287793D7000DE99F /* ProjectsView.swift in Sources */,
+				8805F61028776C69000DE99F /* MainViewModel.swift in Sources */,
+				8805F623287890A8000DE99F /* ProjectDetailsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -337,6 +428,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		8805F60628773CCE000DE99F /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		8805F60728773CCE000DE99F /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8805F60628773CCE000DE99F /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		8805F60928773CCE000DE99F /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8805F60628773CCE000DE99F /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 8805F5E828773B5D000DE99F /* Project object */;
 }
