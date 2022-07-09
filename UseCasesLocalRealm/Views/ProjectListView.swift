@@ -10,10 +10,15 @@ import SwiftUI
 
 struct ProjectListView: View {
     @ObservedResults(Project.self) var projects
+    
     var body: some View {
+        // Check if given Result<Project> is Empty. if not Empty, the view will
+        // be presented with a List of each Project's cell view (ProjectCellView(<Project>))
+        // each cell is capable of navigating to the Project detail view (ProjectDetailView(<Project>)).
+        // each cell is also capable of 
         if projects.isEmpty
         {
-            Text("No projects to display")
+            Text("No projects to display.")
         }
         else
         {
@@ -42,8 +47,8 @@ struct ProjectListView: View {
                     indexSet.forEach
                     {
                         index in
-                        let projToDel = projects[index]
-                        ProjectManager.shared.deleteProject(projToDel)
+                        // delete project at current index
+                        ProjectManager.shared.deleteProject(projects[index])
                     }
                 }
             }.listStyle(.plain)

@@ -10,7 +10,12 @@ import SwiftUI
 struct ProjectDetailsView: View {
     @State var project: Project
     var body: some View {
-        Text("\(project.title)")
+        NavigationStack
+        {
+         Spacer()
+                .navigationTitle(project.title)
+                .navigationBarTitleDisplayMode(.inline)
+        }
     }
 }
 

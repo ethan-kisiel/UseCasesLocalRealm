@@ -7,8 +7,8 @@
 import SwiftUI
 
 //  Moves the text field placeholder value above the text field with animation
-//  Usage: TextInputField(title: "First Name", text: $firstName)
-//  Takes a binding that can be used in a separate view to change the focus of this element
+//  Usage: TextInputField(title: "First Name", text: $firstName, isFocused: $isFocusd)
+//  Takes a focus state binding that can be used in a separate view to change the focus of this element
 
 struct TextInputFieldWithFocus: View
 {

@@ -12,13 +12,12 @@ class UseCase: Object, Identifiable
 {
     @Persisted(primaryKey: true) var _id: ObjectId
     @Persisted var caseId: String = EMPTY_STRING
-    @Persisted var title: String
-    // Created by is the locally stored UserId
     @Persisted var underProject: String
+    @Persisted var title: String
     @Persisted var dateCreated: Date = Date()
     @Persisted var lastUpdated: Date = Date()
-    
-    //@Persisted var UseCases: List<Step>?
+    @Persisted var isComplete: Bool = false
+    @Persisted var UseCases: List<Step> = List<Step>()
     
     convenience init(title: String, projectId: String)
     {

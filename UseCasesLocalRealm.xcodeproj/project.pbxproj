@@ -22,9 +22,9 @@
 		8805F618287775F9000DE99F /* ProjectListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8805F617287775F9000DE99F /* ProjectListView.swift */; };
 		8805F61A2877826C000DE99F /* UseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8805F6192877826C000DE99F /* UseCase.swift */; };
 		8805F61C287793D7000DE99F /* ProjectsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8805F61B287793D7000DE99F /* ProjectsView.swift */; };
-		8805F61F2877DCC8000DE99F /* AddUseCaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8805F61E2877DCC8000DE99F /* AddUseCaseView.swift */; };
 		8805F6212877DF64000DE99F /* ProjectCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8805F6202877DF64000DE99F /* ProjectCellView.swift */; };
 		8805F623287890A8000DE99F /* ProjectDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8805F622287890A8000DE99F /* ProjectDetailsView.swift */; };
+		8805F6252878ED61000DE99F /* Step.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8805F6242878ED61000DE99F /* Step.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,9 +42,9 @@
 		8805F617287775F9000DE99F /* ProjectListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectListView.swift; sourceTree = "<group>"; };
 		8805F6192877826C000DE99F /* UseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseCase.swift; sourceTree = "<group>"; };
 		8805F61B287793D7000DE99F /* ProjectsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectsView.swift; sourceTree = "<group>"; };
-		8805F61E2877DCC8000DE99F /* AddUseCaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddUseCaseView.swift; sourceTree = "<group>"; };
 		8805F6202877DF64000DE99F /* ProjectCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectCellView.swift; sourceTree = "<group>"; };
 		8805F622287890A8000DE99F /* ProjectDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDetailsView.swift; sourceTree = "<group>"; };
+		8805F6242878ED61000DE99F /* Step.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Step.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,7 +107,6 @@
 			children = (
 				8805F61B287793D7000DE99F /* ProjectsView.swift */,
 				8805F617287775F9000DE99F /* ProjectListView.swift */,
-				8805F61E2877DCC8000DE99F /* AddUseCaseView.swift */,
 				8805F6202877DF64000DE99F /* ProjectCellView.swift */,
 				8805F622287890A8000DE99F /* ProjectDetailsView.swift */,
 			);
@@ -127,6 +126,7 @@
 			children = (
 				8805F60B28773D6E000DE99F /* Project.swift */,
 				8805F6192877826C000DE99F /* UseCase.swift */,
+				8805F6242878ED61000DE99F /* Step.swift */,
 			);
 			path = DatabaseModels;
 			sourceTree = "<group>";
@@ -218,13 +218,13 @@
 			files = (
 				8805F614287773A9000DE99F /* TextInputField.swift in Sources */,
 				8805F61228776F48000DE99F /* LocalRealmManager.swift in Sources */,
+				8805F6252878ED61000DE99F /* Step.swift in Sources */,
 				8805F5F628773B5D000DE99F /* ContentView.swift in Sources */,
 				8805F5F428773B5D000DE99F /* UseCasesLocalRealmApp.swift in Sources */,
 				8805F61A2877826C000DE99F /* UseCase.swift in Sources */,
 				8805F60228773C1C000DE99F /* Constants.swift in Sources */,
 				8805F618287775F9000DE99F /* ProjectListView.swift in Sources */,
 				8805F6162877746B000DE99F /* TextInputFieldWithFocus.swift in Sources */,
-				8805F61F2877DCC8000DE99F /* AddUseCaseView.swift in Sources */,
 				8805F6212877DF64000DE99F /* ProjectCellView.swift in Sources */,
 				8805F60C28773D6E000DE99F /* Project.swift in Sources */,
 				8805F61C287793D7000DE99F /* ProjectsView.swift in Sources */,
