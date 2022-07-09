@@ -25,6 +25,7 @@
 		8805F623287890A8000DE99F /* ProjectDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8805F622287890A8000DE99F /* ProjectDetailsView.swift */; };
 		8805F6252878ED61000DE99F /* Step.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8805F6242878ED61000DE99F /* Step.swift */; };
 		88672AB52879143F009129DD /* ProjectsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88672AB42879143F009129DD /* ProjectsView.swift */; };
+		88672AB8287918D9009129DD /* Neumorphic in Frameworks */ = {isa = PBXBuildFile; productRef = 88672AB7287918D9009129DD /* Neumorphic */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +55,7 @@
 			files = (
 				8805F60A28773CCE000DE99F /* RealmSwift in Frameworks */,
 				8805F60828773CCE000DE99F /* Realm in Frameworks */,
+				88672AB8287918D9009129DD /* Neumorphic in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -158,6 +160,7 @@
 			packageProductDependencies = (
 				8805F60728773CCE000DE99F /* Realm */,
 				8805F60928773CCE000DE99F /* RealmSwift */,
+				88672AB7287918D9009129DD /* Neumorphic */,
 			);
 			productName = UseCasesLocalRealm;
 			productReference = 8805F5F028773B5D000DE99F /* UseCasesLocalRealm.app */;
@@ -189,6 +192,7 @@
 			mainGroup = 8805F5E728773B5D000DE99F;
 			packageReferences = (
 				8805F60628773CCE000DE99F /* XCRemoteSwiftPackageReference "realm-swift" */,
+				88672AB6287918D9009129DD /* XCRemoteSwiftPackageReference "neumorphic" */,
 			);
 			productRefGroup = 8805F5F128773B5D000DE99F /* Products */;
 			projectDirPath = "";
@@ -438,6 +442,14 @@
 				kind = branch;
 			};
 		};
+		88672AB6287918D9009129DD /* XCRemoteSwiftPackageReference "neumorphic" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/costachung/neumorphic/";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -450,6 +462,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 8805F60628773CCE000DE99F /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = RealmSwift;
+		};
+		88672AB7287918D9009129DD /* Neumorphic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 88672AB6287918D9009129DD /* XCRemoteSwiftPackageReference "neumorphic" */;
+			productName = Neumorphic;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

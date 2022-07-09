@@ -21,34 +21,33 @@ struct ProjectsView: View {
             {
                 withAnimation
                 {
-                    TextInputField("Title", text: $title)
+                    TextInputField("Title", text: $title).padding(8)
                 }
                 withAnimation
                 {
-                    TextInputField("Project ID", text: $projectId)
+                    TextInputField("Project ID", text: $projectId).padding(8)
                 }
-                
-                Button(action: {
-                    project = Project(title: title, createdBy: getUserId())
-                    
-                    project!.projectId = projectId
-                    ProjectManager.shared.addProject(project: project!)
-                    
-                    title = EMPTY_STRING
-                    projectId = EMPTY_STRING
-                })
-                {
-                    Text("Create Project").foregroundColor(title.isEmpty || projectId.isEmpty ? .white : .gray)
-                }
-                .disabled(title.isEmpty || projectId.isEmpty)
-                .buttonStyle(.bordered)
-                .frame(maxWidth: .infinity)
-                
-                ProjectListView()
-                Spacer()
-                    .navigationTitle("Projects")
-                
             }
+            Button(action: {
+                project = Project(title: title, createdBy: getUserId())
+                
+                project!.projectId = projectId
+                ProjectManager.shared.addProject(project: project!)
+                
+                title = EMPTY_STRING
+                projectId = EMPTY_STRING
+            })
+            {
+                Text("Create Project").foregroundColor(title.isEmpty || projectId.isEmpty ? .white : .gray)
+            }
+            .disabled(title.isEmpty || projectId.isEmpty)
+            .buttonStyle(.bordered)
+            .frame(maxWidth: .infinity)
+            
+            Spacer()
+            ProjectListView()
+            Spacer()
+                .navigationTitle("Projects")
         }.padding(10)
     }
 }

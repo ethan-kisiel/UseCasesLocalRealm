@@ -59,7 +59,7 @@ struct ProjectListView: View {
 struct ProjectListView_Previews: PreviewProvider {
 
     static var previews: some View {
-        Text("no preview")
+        //@ObservedResults(Project.self) var projects
         ProjectListView()
     }
 }
