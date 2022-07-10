@@ -7,11 +7,13 @@
 
 import RealmSwift
 import SwiftUI
+import Neumorphic
 
 struct ProjectsView: View {
     @State var title: String = EMPTY_STRING
     @State var projectId: String = EMPTY_STRING
     @State var project: Project?
+    @FocusState var isFocused: Bool
     
     @ObservedResults(Project.self) var projects: Results<Project>
     var body: some View {
@@ -21,28 +23,32 @@ struct ProjectsView: View {
             {
                 withAnimation
                 {
-                    TextInputField("Title", text: $title).padding(8)
+                    TextInputFieldWithFocus("Title", text: $title, isFocused: $isFocused).padding(8)
                 }
                 withAnimation
                 {
-                    TextInputField("Project ID", text: $projectId).padding(8)
+                    TextInputFieldWithFocus("Project ID", text: $projectId, isFocused: $isFocused).padding(8)
                 }
+                Button(action:
+                {
+                    project = Project(title: title, createdBy: getUserId())
+                    
+                    project!.projectId = projectId
+                    ProjectManager.shared.addProject(project: project!)
+                    
+                    title = EMPTY_STRING
+                    projectId = EMPTY_STRING
+                    isFocused = false
+                })
+                {
+                    Text("Create Project").foregroundColor(title.isEmpty || projectId.isEmpty ? .secondary : .primary)
+                        .fontWeight(.bold)
+                        
+                }
+                .softButtonStyle(RoundedRectangle(cornerRadius: CGFloat(15)))
+                .disabled(title.isEmpty || projectId.isEmpty)
+                .frame(maxWidth: .greatestFiniteMagnitude)
             }
-            Button(action: {
-                project = Project(title: title, createdBy: getUserId())
-                
-                project!.projectId = projectId
-                ProjectManager.shared.addProject(project: project!)
-                
-                title = EMPTY_STRING
-                projectId = EMPTY_STRING
-            })
-            {
-                Text("Create Project").foregroundColor(title.isEmpty || projectId.isEmpty ? .white : .gray)
-            }
-            .disabled(title.isEmpty || projectId.isEmpty)
-            .buttonStyle(.bordered)
-            .frame(maxWidth: .infinity)
             
             Spacer()
             ProjectListView()

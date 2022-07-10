@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		8805F5F428773B5D000DE99F /* UseCasesLocalRealmApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8805F5F328773B5D000DE99F /* UseCasesLocalRealmApp.swift */; };
-		8805F5F628773B5D000DE99F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8805F5F528773B5D000DE99F /* ContentView.swift */; };
 		8805F5F828773B5E000DE99F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8805F5F728773B5E000DE99F /* Assets.xcassets */; };
 		8805F5FB28773B5E000DE99F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8805F5FA28773B5E000DE99F /* Preview Assets.xcassets */; };
 		8805F60228773C1C000DE99F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8805F60128773C1C000DE99F /* Constants.swift */; };
@@ -31,7 +30,6 @@
 /* Begin PBXFileReference section */
 		8805F5F028773B5D000DE99F /* UseCasesLocalRealm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UseCasesLocalRealm.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8805F5F328773B5D000DE99F /* UseCasesLocalRealmApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseCasesLocalRealmApp.swift; sourceTree = "<group>"; };
-		8805F5F528773B5D000DE99F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		8805F5F728773B5E000DE99F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8805F5FA28773B5E000DE99F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		8805F60128773C1C000DE99F /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -87,7 +85,6 @@
 				8805F60428773C46000DE99F /* ViewModels */,
 				8805F60328773C3D000DE99F /* Views */,
 				8805F5F328773B5D000DE99F /* UseCasesLocalRealmApp.swift */,
-				8805F5F528773B5D000DE99F /* ContentView.swift */,
 				8805F5F728773B5E000DE99F /* Assets.xcassets */,
 				8805F5F928773B5E000DE99F /* Preview Content */,
 				8805F60128773C1C000DE99F /* Constants.swift */,
@@ -223,7 +220,6 @@
 				8805F614287773A9000DE99F /* TextInputField.swift in Sources */,
 				8805F61228776F48000DE99F /* LocalRealmManager.swift in Sources */,
 				8805F6252878ED61000DE99F /* Step.swift in Sources */,
-				8805F5F628773B5D000DE99F /* ContentView.swift in Sources */,
 				88672AB52879143F009129DD /* ProjectsView.swift in Sources */,
 				8805F5F428773B5D000DE99F /* UseCasesLocalRealmApp.swift in Sources */,
 				8805F61A2877826C000DE99F /* UseCase.swift in Sources */,

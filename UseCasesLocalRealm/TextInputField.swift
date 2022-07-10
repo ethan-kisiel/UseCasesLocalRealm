@@ -5,7 +5,7 @@
 //  Created by Larry Burris on 6/20/22.
 //
 import SwiftUI
-
+import Neumorphic
 //  Moves the text field placeholder value above the text field with animation
 //  Usage: TextInputField(title: "First Name", text: $firstName)
 
@@ -34,6 +34,7 @@ struct TextInputField: View
 
                 TextField(title, text: $text)
                     .textFieldStyle(.roundedBorder)
+                    
             }
             .padding(.top, 15)
         }

@@ -16,19 +16,33 @@ struct ProjectCellView: View
     {
         HStack(alignment: .center)
         {
-            NavigationLink("\(project.title)", value: Route.project(project))
-            Spacer()
+            // Constants.TRASH_ICON: String
             Image(systemName: TRASH_ICON).foregroundColor(trashIsEnabled ? .red: .gray)
                 .disabled(trashIsEnabled)
-                .onLongPressGesture(minimumDuration: 1)
+                .onLongPressGesture(minimumDuration: 0.8)
                 {
                     trashIsEnabled.toggle()
-                }.onTapGesture {
+                }
+                .onTapGesture
+                {
                     if trashIsEnabled
                     {
                         ProjectManager.shared.deleteProject(project)
                     }
                 }
+            
+                    Spacer()
+            NavigationLink("\(project.title)", value: Route.project(project))
+            
+            
+            let projectId = project.projectId
+            
+            if let range = projectId.startIndex..<(projectId.index( projectId.startIndex, offsetBy: 3, limitedBy: projectId.endIndex) ?? projectId.endIndex)
+            {
+            
+                let subProjectId = projectId[range] + "..."
+                Text(subProjectId)
+            }
         }
     }
 }
