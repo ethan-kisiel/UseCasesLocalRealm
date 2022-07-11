@@ -46,14 +46,13 @@ struct ProjectListView: View {
                     }
                 }
             }.listStyle(.plain)
+                .padding()
         }
     }
 }
 
 struct ProjectListView_Previews: PreviewProvider {
-
     static var previews: some View {
-        //@ObservedResults(Project.self) var projects
         ProjectListView()
     }
 }

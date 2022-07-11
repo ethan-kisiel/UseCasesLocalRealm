@@ -81,6 +81,7 @@ struct UseCaseListView: View {
             }
         }
         .listStyle(.plain)
+        .padding()
     }
 }
 

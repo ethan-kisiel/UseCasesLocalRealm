@@ -18,23 +18,31 @@ struct StepListView: View {
     }
     
     var body: some View {
-        List
+        if useCaseSteps.isEmpty
         {
-            ForEach(useCaseSteps, id:\._id)
+            Text("No steps to display.")
+        }
+        else
+        {
+            List
             {
-                step in
-                StepCellView(step: step)
-            }.onDelete
-            {
-                indexSet in
-                indexSet.forEach
+                ForEach(useCaseSteps, id:\._id)
                 {
-                    index in
-                    StepManager.shared.deleteStep(step: useCaseSteps[index])
+                    step in
+                    StepCellView(step: step)
+                }.onDelete
+                {
+                    indexSet in
+                    indexSet.forEach
+                    {
+                        index in
+                        StepManager.shared.deleteStep(step: useCaseSteps[index])
+                    }
                 }
             }
+            .listStyle(.plain)
+            .padding()
         }
-        .listStyle(.plain)
     }
 }
 

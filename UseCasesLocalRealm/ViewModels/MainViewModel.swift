@@ -9,13 +9,15 @@ import Foundation
 
 func getUserId() -> String
 {
-    // if a value for the UserId key does not exist, create a string UUID and set to UserId key
-    guard let userId = UserDefaults.standard.string(forKey: USER_ID_STRING) else
+    // checks for a userId in UserDefaults. if it does not exist, a new UUID
+    // string will be set as the current userId in UserDefaults.
+    guard let userId = UserDefaults.standard.string(forKey: USER_ID_STRING)
+    else
     {
         let userId = UUID().uuidString
         UserDefaults.standard.set(userId, forKey: USER_ID_STRING)
         return userId
     }
-    
+
     return userId
 }

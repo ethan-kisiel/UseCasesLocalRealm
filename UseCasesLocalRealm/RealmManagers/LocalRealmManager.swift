@@ -3,30 +3,35 @@
 //  UseCasesLocalRealm
 //
 //  Created by Ethan Kisiel on 7/7/22.
-//
+// Three singleton classes (each having a .shared static member),
+// ProjectManager, UseCaseManager, and StepManager
+// All singleton classes are used for realm local database changes
 
 import Foundation
 import RealmSwift
 
-
 class ProjectManager
 {
     static let shared = ProjectManager()
-    
+
     let localRealm = try! Realm()
-    
-    func addProject(project: Project) -> Void
+
+    func addProject(project: Project)
     {
         // attempt to locally save given project
-        
+
         try? localRealm.write
         {
             localRealm.add(project)
         }
     }
-    
-    func deleteProject(_ project: Project) -> Void
+
+    func deleteProject(_ project: Project)
     {
+        // if the given project: project exists, delete all of the projects
+        // use cases using UseCaseManager.shared.deleteUseCase() and looping
+        // through project.useCases; it then attempts delete the given project
+
         if let projectToDelete = localRealm.object(ofType: Project.self, forPrimaryKey: project._id)
         {
             if !projectToDelete.useCases.isEmpty
@@ -42,7 +47,7 @@ class ProjectManager
             }
         }
     }
-    
+
     func getProjectsByUID(userId: String) -> Results<Project>
     {
         // retrieve locally stored project by given userId
@@ -51,33 +56,34 @@ class ProjectManager
         {
             $0.createdBy == userId
         }
-        
+
         return userProjects
     }
-    
-
 }
 
 class UseCaseManager
 {
     static let shared = UseCaseManager()
-    
+
     let localRealm = try! Realm()
-    
-    func addUseCase(project: Project, useCase: UseCase) -> Void
+
+    func addUseCase(project: Project, useCase: UseCase)
     {
-        // gets ObservedResult projects and appends current use case to the first item where item._id == project._id
+        // finds the target project from the given project._id and
+        // appends the given useCase to the given project
+        // in the local realm database
         
-        @ObservedResults(Project.self) var projects: Results<Project>
-        let targetProject = projects.first { $0._id == project._id }
+        let targetProject = localRealm.object(ofType: Project.self, forPrimaryKey: project._id)
         try? localRealm.write
         {
             targetProject?.useCases.append(useCase)
         }
     }
-    
-    func deleteUseCase(useCase: UseCase) -> Void
+
+    func deleteUseCase(useCase: UseCase)
     {
+        // Same implimentation as ProjectManager.deleteProject()
+        
         if let caseToDelete = localRealm.object(ofType: UseCase.self, forPrimaryKey: useCase._id)
         {
             if !caseToDelete.steps.isEmpty
@@ -91,13 +97,14 @@ class UseCaseManager
             {
                 localRealm.delete(caseToDelete)
             }
-            
         }
     }
-    
+
     func toggleUseCaseCompleteness(useCase: UseCase)
     {
-
+        // this function simply toggles the useCase.isComplete boolean within
+        // the local realm db
+        
         if let useCaseToUpdate = localRealm.object(ofType: UseCase.self, forPrimaryKey: useCase._id)
         {
             try? localRealm.write
@@ -111,23 +118,23 @@ class UseCaseManager
 class StepManager
 {
     static let shared = StepManager()
-    
+
     let localRealm = try! Realm()
-    
-    func addStep(useCase: UseCase, step: Step) -> Void
+
+    func addStep(useCase: UseCase, step: Step)
     {
-        //
-       
-        @ObservedResults(UseCase.self) var useCases: Results<UseCase>
-        let targetUseCase = useCases.first { $0._id == useCase._id }
+        // Same implimentation as ProjectManager.addUseCase
+        let targetUseCase = localRealm.object(ofType: UseCase.self, forPrimaryKey: useCase._id)
         try? localRealm.write
         {
             targetUseCase?.steps.append(step)
         }
     }
-    
-    func deleteStep(step: Step) -> Void
+
+    func deleteStep(step: Step)
     {
+        // Same implimentation as ProjectManager.deleteProject()
+        
         if let stepToDelete = localRealm.object(ofType: Step.self, forPrimaryKey: step._id)
         {
             try? localRealm.write
