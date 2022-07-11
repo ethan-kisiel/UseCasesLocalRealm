@@ -9,9 +9,8 @@ import Foundation
 import RealmSwift
 
 
-class ProjectManager: ObservableObject
+class ProjectManager
 {
-    
     static let shared = ProjectManager()
     
     let localRealm = try! Realm()
@@ -67,8 +66,8 @@ class UseCaseManager
     
     func addUseCase(project: Project, useCase: UseCase) -> Void
     {
-        // attempt to locally save given project
-       
+        // gets ObservedResult projects and appends current use case to the first item where item._id == project._id
+        
         @ObservedResults(Project.self) var projects: Results<Project>
         let targetProject = projects.first { $0._id == project._id }
         try? localRealm.write
@@ -81,12 +80,18 @@ class UseCaseManager
     {
         if let caseToDelete = localRealm.object(ofType: UseCase.self, forPrimaryKey: useCase._id)
         {
+            if !caseToDelete.steps.isEmpty
+            {
+                for step in caseToDelete.steps
+                {
+                    StepManager.shared.deleteStep(step: step)
+                }
+            }
             try? localRealm.write
             {
                 localRealm.delete(caseToDelete)
             }
             
-            //self.projects = ProjectManager.shared.getProjectsByUID(userId: getUserId())
         }
     }
     
@@ -101,5 +106,34 @@ class UseCaseManager
             }
         }
     }
-    // get use case via searchbar
+}
+
+class StepManager
+{
+    static let shared = StepManager()
+    
+    let localRealm = try! Realm()
+    
+    func addStep(useCase: UseCase, step: Step) -> Void
+    {
+        //
+       
+        @ObservedResults(UseCase.self) var useCases: Results<UseCase>
+        let targetUseCase = useCases.first { $0._id == useCase._id }
+        try? localRealm.write
+        {
+            targetUseCase?.steps.append(step)
+        }
+    }
+    
+    func deleteStep(step: Step) -> Void
+    {
+        if let stepToDelete = localRealm.object(ofType: Step.self, forPrimaryKey: step._id)
+        {
+            try? localRealm.write
+            {
+                localRealm.delete(stepToDelete)
+            }
+        }
+    }
 }

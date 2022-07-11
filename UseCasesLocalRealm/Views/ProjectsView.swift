@@ -20,16 +20,17 @@ struct ProjectsView: View {
     @FocusState var isFocused: Bool
     
     var body: some View {
-        HStack(alignment: .top)
-        {
-            Spacer()
-            Image(systemName: showAddFields ? LESS_ICON : MORE_ICON)
-                .onTapGesture {
-                    showAddFields.toggle()
-                }
-        }.padding()
-        NavigationStack
-        {
+        VStack{
+            HStack(alignment: .top)
+            {
+                Spacer()
+                Image(systemName: showAddFields ? LESS_ICON : MORE_ICON)
+                    .onTapGesture {
+                        showAddFields.toggle()
+                    }
+            }.padding()
+            //NavigationStack
+            //{
             if showAddFields
             {
                 VStack(spacing: 10)
@@ -55,13 +56,12 @@ struct ProjectsView: View {
                     })
                     {
                         Text("Create Project").foregroundColor(title.isEmpty || projectId.isEmpty ? .secondary : .primary)
-                            .fontWeight(.bold)
+                            .fontWeight(.bold).frame(maxWidth: .infinity)
                         
                     }
                     .softButtonStyle(RoundedRectangle(cornerRadius: CGFloat(15)))
                     .disabled(title.isEmpty || projectId.isEmpty)
-                    .frame(maxWidth: .greatestFiniteMagnitude)
-                }
+                }.padding()
             }
             
             Spacer()
@@ -69,7 +69,9 @@ struct ProjectsView: View {
             Spacer()
                 .navigationTitle("Projects")
                 .navigationBarTitleDisplayMode(.inline)
-        }.padding(10)
+            //}.padding(10)
+            
+        }
     }
 }
 

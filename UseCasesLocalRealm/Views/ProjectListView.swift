@@ -9,8 +9,9 @@ import RealmSwift
 import SwiftUI
 
 struct ProjectListView: View {
-    @ObservedResults(Project.self) var projectResults: Results<Project>
+    
     let userId: String = getUserId()
+    @ObservedResults(Project.self) var projectResults: Results<Project>
     var userProjects: [Project]
     {
         return projectResults.filter { $0.createdBy == userId }
@@ -33,20 +34,7 @@ struct ProjectListView: View {
                 ForEach(userProjects, id: \._id)
                 {
                     project in
-                    
                     ProjectCellView(project: project)
-                        .navigationDestination(for: Route.self)
-                    { route in
-                        switch route
-                        {
-                            case .projects:
-                                ProjectsView()
-                            case .project(let project):
-                                ProjectDetailsView(project: project)
-                            case .useCase(let useCase):
-                                UseCaseDetailsView(useCase: useCase)
-                        }
-                    }
                 }
                 .onDelete {
                     indexSet in

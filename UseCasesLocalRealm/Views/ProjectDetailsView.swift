@@ -49,11 +49,11 @@ struct ProjectDetailsView: View {
                     
                     withAnimation
                     {
-                        TextInputFieldWithFocus("Title", text: $title, isFocused: $isFocused).padding(8)
+                        TextInputFieldWithFocus("Use Case", text: $title, isFocused: $isFocused).padding(8)
                     }
                     withAnimation
                     {
-                        TextInputFieldWithFocus("Case ID", text: $caseId, isFocused: $isFocused).padding(8)
+                        TextInputFieldWithFocus("ID", text: $caseId, isFocused: $isFocused).padding(8)
                     }
                     
                     Button(action:
@@ -69,17 +69,16 @@ struct ProjectDetailsView: View {
                     })
                     {
                         Text("Add Use Case").foregroundColor(title.isEmpty || caseId.isEmpty ? .secondary : .primary)
-                            .fontWeight(.bold)
+                            .fontWeight(.bold).frame(maxWidth: .infinity)
                         
                     }
                     .softButtonStyle(RoundedRectangle(cornerRadius: CGFloat(15)))
                     .disabled(title.isEmpty || caseId.isEmpty)
-                    .frame(maxWidth: .greatestFiniteMagnitude)
-                }
+                }.padding()
             }
         
             Spacer()
-            UseCasesListView(project: project)
+            UseCaseListView(project: project)
             Spacer()
                 .navigationTitle(project.title)
                 .navigationBarTitleDisplayMode(.inline)

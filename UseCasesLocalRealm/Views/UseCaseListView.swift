@@ -13,7 +13,7 @@ enum Sections: String, CaseIterable
     case complete = "complete"
 }
 
-struct UseCasesListView: View {
+struct UseCaseListView: View {
     // takes project for filter query purposes
     @State var project: Project
     @ObservedResults(UseCase.self) var useCases: Results<UseCase>
@@ -87,6 +87,6 @@ struct UseCasesListView: View {
 struct UseCasesListView_Previews: PreviewProvider {
     static var previews: some View {
         let project: Project = Project()
-        UseCasesListView(project: project)
+        UseCaseListView(project: project)
     }
 }

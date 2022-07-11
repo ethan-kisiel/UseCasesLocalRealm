@@ -17,7 +17,6 @@ let CHECKED_ICON: String = "square.inset.filled"
 let MORE_ICON: String = "ellipsis.circle"
 let LESS_ICON: String = "minus.circle"
 
-
 enum Priority: String, CaseIterable, PersistableEnum
 {
     case low = "Low"

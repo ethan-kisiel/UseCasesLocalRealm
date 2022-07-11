@@ -26,16 +26,17 @@ struct UseCasesLocalRealmApp: App {
             NavigationStack
             {
                 ProjectsView()
-            }.navigationDestination(for: Route.self)
-            { route in
-                switch route
-                {
-                    case .projects:
-                        ProjectsView()
-                    case .project(let project):
-                        ProjectDetailsView(project: project)
-                    case .useCase(let useCase):
-                        UseCaseDetailsView(useCase: useCase)
+                .navigationDestination(for: Route.self)
+                { route in
+                    switch route
+                    {
+                        case .projects:
+                            ProjectsView()
+                        case .project(let project):
+                            ProjectDetailsView(project: project)
+                        case .useCase(let useCase):
+                            UseCaseDetailsView(useCase: useCase)
+                    }
                 }
             }
         }

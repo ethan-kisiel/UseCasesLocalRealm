@@ -15,6 +15,7 @@ struct UseCaseDetailsView: View {
     @FocusState var isFocused: Bool
     
     @State var text: String = EMPTY_STRING
+    @State var stepId: String = EMPTY_STRING
     
     var body: some View {
         HStack(alignment: .top)
@@ -35,25 +36,33 @@ struct UseCaseDetailsView: View {
             {
                 withAnimation
                 {
-                    TextInputFieldWithFocus("Title", text: $text, isFocused: $isFocused).padding(8)
+                    TextInputFieldWithFocus("Step", text: $text, isFocused: $isFocused).padding(8)
+                }
+                withAnimation
+                {
+                    TextInputFieldWithFocus("ID", text: $stepId, isFocused: $isFocused).padding(8)
                 }
                 
                 Button(action:
-                        {
-                    
+                {
+                    let step = Step(text: text, useCaseId: useCase._id)
+                    step.stepId = stepId
+                    StepManager.shared.addStep(useCase: useCase, step: step)
+                    text = EMPTY_STRING
+                    stepId = EMPTY_STRING
                     isFocused = false
                 })
                 {
-                    Text("Add Use Case").foregroundColor(text.isEmpty ? .secondary : .primary)
-                        .fontWeight(.bold)
+                    Text("Add Step").foregroundColor(text.isEmpty ? .secondary : .primary)
+                        .fontWeight(.bold).frame(maxWidth: .infinity)
                     
                 }
                 .softButtonStyle(RoundedRectangle(cornerRadius: CGFloat(15)))
                 .disabled(text.isEmpty)
-                .frame(maxWidth: .greatestFiniteMagnitude)
-            }
+            }.padding()
         }
-        
+        Spacer()
+        StepListView(useCase: useCase)
         Spacer().navigationTitle("\(useCase.caseId)")
                 .navigationBarTitleDisplayMode(.inline)
     }
