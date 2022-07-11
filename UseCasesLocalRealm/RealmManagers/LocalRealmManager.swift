@@ -58,5 +58,31 @@ class UseCaseManager
 {
     static let shared = UseCaseManager()
     
+    let localRealm = try! Realm()
+    
+    func addUseCase(project: Project, useCase: UseCase) -> Void
+    {
+        // attempt to locally save given project
+       
+        @ObservedResults(Project.self) var projects: Results<Project>
+        var targetProject = projects.first { $0._id == project._id }
+        try? localRealm.write
+        {
+            targetProject?.useCases.append(useCase)
+        }
+    }
+    
+    func deleteUseCase(project: Project, useCase: UseCase) -> Void
+    {
+        if let objectToDelete = localRealm.object(ofType: UseCase.self, forPrimaryKey: useCase._id)
+        {
+            try? localRealm.write
+            {
+                localRealm.delete(objectToDelete)
+            }
+            
+            //self.projects = ProjectManager.shared.getProjectsByUID(userId: getUserId())
+        }
+    }
     // get use case via searchbar
 }

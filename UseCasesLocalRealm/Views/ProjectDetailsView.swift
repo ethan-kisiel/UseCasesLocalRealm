@@ -11,15 +11,30 @@ import Neumorphic
 struct ProjectDetailsView: View {
     @State var project: Project
     
+    @State var priority: Priority = .medium
     @State var title: String = EMPTY_STRING
     @State var caseId: String = EMPTY_STRING
+    
     @State var useCase: UseCase?
     
     @FocusState var isFocused: Bool
     
     var body: some View {
-            VStack(spacing: 10)
+        Text("ID: \(project.projectId)")
+            .fontWeight(.semibold)
+
+            VStack(spacing: 5)
             {
+                Picker("Priority:", selection: $priority)
+                {
+                    ForEach(Priority.allCases, id: \.self)
+                    {
+                        priority in
+                        Text(priority.rawValue)
+                    }
+                }
+                .pickerStyle(.segmented)
+                .padding(5)
                 
                 withAnimation
                 {
@@ -32,10 +47,12 @@ struct ProjectDetailsView: View {
             
                 Button(action:
                 {
-                    useCase = UseCase(title: title, projectId: project._id)
+                    useCase = UseCase(title: title, projectId: project._id, priority: priority)
                     
+                    UseCaseManager.shared.addUseCase(project: project, useCase: useCase!)
                     title = EMPTY_STRING
                     caseId = EMPTY_STRING
+                    priority = .medium
                     isFocused = false
                 })
                 {
@@ -47,7 +64,9 @@ struct ProjectDetailsView: View {
                 .disabled(title.isEmpty || caseId.isEmpty)
                 .frame(maxWidth: .greatestFiniteMagnitude)
                  
+                UseCasesListView(project: project)
             }
+        
             Spacer()
                 .navigationTitle(project.title)
                 .navigationBarTitleDisplayMode(.inline)
