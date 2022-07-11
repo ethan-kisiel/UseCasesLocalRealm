@@ -14,12 +14,14 @@ struct ProjectCellView: View
     let project: Project
     var body: some View
     {
-        HStack(alignment: .center)
+        NavigationLink(value: Route.project(project))
         {
-            // Constants.TRASH_ICON: String
-            Image(systemName: TRASH_ICON).foregroundColor(trashIsEnabled ? .red: .gray)
-                .disabled(trashIsEnabled)
-                .onLongPressGesture(minimumDuration: 0.8)
+            HStack(alignment: .center)
+            {
+                // Constants.TRASH_ICON: String
+                Image(systemName: TRASH_ICON).foregroundColor(trashIsEnabled ? .red: .gray)
+                    .disabled(trashIsEnabled)
+                    .onLongPressGesture(minimumDuration: 0.8)
                 {
                     trashIsEnabled.toggle()
                 }
@@ -30,18 +32,18 @@ struct ProjectCellView: View
                         ProjectManager.shared.deleteProject(project)
                     }
                 }
-            
-                    Spacer()
-            NavigationLink("\(project.title)", value: Route.project(project))
-            
-            
-            let projectId = project.projectId
-            
-            if let range = projectId.startIndex..<(projectId.index( projectId.startIndex, offsetBy: 3, limitedBy: projectId.endIndex) ?? projectId.endIndex)
-            {
-            
-                let subProjectId = projectId[range] + "..."
-                Text(subProjectId)
+                
+
+                Text(project.title)
+                Spacer()
+                let projectId = project.projectId
+                
+                if let range = projectId.startIndex..<(projectId.index( projectId.startIndex, offsetBy: 3, limitedBy: projectId.endIndex) ?? projectId.endIndex)
+                {
+                    
+                    let subProjectId = projectId[range] + "..."
+                    Text(subProjectId)
+                }
             }
         }
     }

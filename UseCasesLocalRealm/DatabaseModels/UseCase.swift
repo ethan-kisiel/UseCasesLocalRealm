@@ -19,7 +19,7 @@ class UseCase: Object, Identifiable
     @Persisted var lastUpdated: Date = Date()
     @Persisted var priority: Priority = .medium
     @Persisted var isComplete: Bool = false
-    @Persisted var UseCases: List<Step> = List<Step>()
+    @Persisted var steps: List<Step> = List<Step>()
     
     convenience init(title: String, projectId: ObjectId, priority: Priority)
     {

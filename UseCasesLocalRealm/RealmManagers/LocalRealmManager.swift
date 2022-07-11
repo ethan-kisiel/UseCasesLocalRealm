@@ -28,11 +28,15 @@ class ProjectManager: ObservableObject
     
     func deleteProject(_ project: Project) -> Void
     {
-        if let objectToDelete = localRealm.object(ofType: Project.self, forPrimaryKey: project._id)
+        if let projectToDelete = localRealm.object(ofType: Project.self, forPrimaryKey: project._id)
         {
             try? localRealm.write
             {
-                localRealm.delete(objectToDelete)
+                for useCase in projectToDelete.useCases
+                {
+                    UseCaseManager.shared.deleteUseCase(useCase: useCase)
+                }
+                localRealm.delete(projectToDelete)
             }
             
             //self.projects = ProjectManager.shared.getProjectsByUID(userId: getUserId())
@@ -72,7 +76,7 @@ class UseCaseManager
         }
     }
     
-    func deleteUseCase(project: Project, useCase: UseCase) -> Void
+    func deleteUseCase(useCase: UseCase) -> Void
     {
         if let objectToDelete = localRealm.object(ofType: UseCase.self, forPrimaryKey: useCase._id)
         {
@@ -82,6 +86,18 @@ class UseCaseManager
             }
             
             //self.projects = ProjectManager.shared.getProjectsByUID(userId: getUserId())
+        }
+    }
+    
+    func toggleUseCaseCompleteness(useCase: UseCase)
+    {
+
+        if let useCaseToUpdate = localRealm.object(ofType: UseCase.self, forPrimaryKey: useCase._id)
+        {
+            try? localRealm.write
+            {
+                useCaseToUpdate.isComplete.toggle()
+            }
         }
     }
     // get use case via searchbar

@@ -9,8 +9,8 @@ import RealmSwift
 import SwiftUI
 enum Sections: String, CaseIterable
 {
-    case complete = "complete"
     case incomplete = "incomplete"
+    case complete = "complete"
 }
 
 struct UseCasesListView: View {
@@ -48,6 +48,7 @@ struct UseCasesListView: View {
                         Text("No \(section.rawValue) use cases to show.")
                             .foregroundColor(.secondary)
                             .opacity(0.5)
+                        Spacer()
                     }
                     else
                     {
@@ -56,10 +57,21 @@ struct UseCasesListView: View {
                             useCase in
                             UseCaseCellView(useCase: useCase)
                         }
+                        .onDelete
+                        {
+                            indexSet in
+                            indexSet.forEach
+                            {
+                                index in
+                                UseCaseManager.shared.deleteUseCase(useCase: filteredCases[index])
+                            }
+                        }
+                        Spacer()
                     }
                 }
             }
-        }.listStyle(.plain)
+        }
+        .listStyle(.plain)
     }
 }
 
