@@ -10,6 +10,7 @@ import SwiftUI
 import Neumorphic
 
 struct ProjectsView: View {
+    @ObservedResults(Project.self) var projects: Results<Project>
     let userId: String = getUserId()
     @State var title: String = EMPTY_STRING
     @State var projectId: String = EMPTY_STRING
@@ -18,7 +19,6 @@ struct ProjectsView: View {
     @State var showAddFields: Bool = false
     @FocusState var isFocused: Bool
     
-    @ObservedResults(Project.self) var projects: Results<Project>
     var body: some View {
         HStack(alignment: .top)
         {

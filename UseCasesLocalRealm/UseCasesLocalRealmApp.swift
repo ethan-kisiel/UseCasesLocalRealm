@@ -35,7 +35,7 @@ struct UseCasesLocalRealmApp: App {
                     case .project(let project):
                         ProjectDetailsView(project: project)
                     case .useCase(let useCase):
-                        Text("use case views")
+                        UseCaseDetailsView(useCase: useCase)
                 }
             }
         }

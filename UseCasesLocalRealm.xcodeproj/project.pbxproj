@@ -27,6 +27,7 @@
 		88672AB8287918D9009129DD /* Neumorphic in Frameworks */ = {isa = PBXBuildFile; productRef = 88672AB7287918D9009129DD /* Neumorphic */; };
 		88672ABC287B8F99009129DD /* UseCasesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88672ABB287B8F99009129DD /* UseCasesListView.swift */; };
 		88672ABE287B8FA8009129DD /* UseCaseCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88672ABD287B8FA8009129DD /* UseCaseCellView.swift */; };
+		88672AC0287C627E009129DD /* UseCaseDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88672ABF287C627E009129DD /* UseCaseDetailsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +49,7 @@
 		88672AB42879143F009129DD /* ProjectsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectsView.swift; sourceTree = "<group>"; };
 		88672ABB287B8F99009129DD /* UseCasesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseCasesListView.swift; sourceTree = "<group>"; };
 		88672ABD287B8FA8009129DD /* UseCaseCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseCaseCellView.swift; sourceTree = "<group>"; };
+		88672ABF287C627E009129DD /* UseCaseDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseCaseDetailsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +116,7 @@
 				8805F622287890A8000DE99F /* ProjectDetailsView.swift */,
 				88672ABB287B8F99009129DD /* UseCasesListView.swift */,
 				88672ABD287B8FA8009129DD /* UseCaseCellView.swift */,
+				88672ABF287C627E009129DD /* UseCaseDetailsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -236,6 +239,7 @@
 				8805F6212877DF64000DE99F /* ProjectCellView.swift in Sources */,
 				88672ABE287B8FA8009129DD /* UseCaseCellView.swift in Sources */,
 				8805F60C28773D6E000DE99F /* Project.swift in Sources */,
+				88672AC0287C627E009129DD /* UseCaseDetailsView.swift in Sources */,
 				8805F61028776C69000DE99F /* MainViewModel.swift in Sources */,
 				8805F623287890A8000DE99F /* ProjectDetailsView.swift in Sources */,
 			);

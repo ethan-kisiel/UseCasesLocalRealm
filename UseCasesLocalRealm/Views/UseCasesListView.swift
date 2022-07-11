@@ -54,11 +54,13 @@ struct UseCasesListView: View {
                         switch section
                         {
                         case .incomplete:
-                            Text("Icomplete use cases:")
+                            Text("Incomplete use cases:")
                                 .fontWeight(.semibold)
+                                .opacity(0.5)
                         case .complete:
                             Text("Complete use cases:")
                                 .fontWeight(.semibold)
+                                .opacity(0.5)
                         }
                         ForEach(filteredCases, id: \._id)
                         {

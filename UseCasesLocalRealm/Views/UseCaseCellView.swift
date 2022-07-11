@@ -10,7 +10,6 @@ import SwiftUI
 import Neumorphic
 
 struct UseCaseCellView: View {
-    @ObservedResults(UseCase.self) var useCases: Results<UseCase>
     @State var useCase: UseCase
     
     private func priorityBackground(_ priority: Priority) -> Color

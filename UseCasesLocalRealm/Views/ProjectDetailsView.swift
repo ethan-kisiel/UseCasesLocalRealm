@@ -59,6 +59,7 @@ struct ProjectDetailsView: View {
                     Button(action:
                             {
                         useCase = UseCase(title: title, projectId: project._id, priority: priority)
+                        useCase!.caseId = caseId
                         
                         UseCaseManager.shared.addUseCase(project: project, useCase: useCase!)
                         title = EMPTY_STRING

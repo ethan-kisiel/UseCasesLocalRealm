@@ -5,10 +5,12 @@
 //  Created by Ethan Kisiel on 7/7/22.
 //
 
+import RealmSwift
 import SwiftUI
 
 struct ProjectCellView: View
 {
+    @ObservedResults(Project.self) var projects: Results<Project>
     @State var trashIsEnabled: Bool = false
     
     let project: Project

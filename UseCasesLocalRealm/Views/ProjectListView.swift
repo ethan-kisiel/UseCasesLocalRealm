@@ -10,15 +10,19 @@ import SwiftUI
 
 struct ProjectListView: View {
     @ObservedResults(Project.self) var projectResults: Results<Project>
-    
+    let userId: String = getUserId()
+    var userProjects: [Project]
+    {
+        return projectResults.filter { $0.createdBy == userId }
+    }
     // get only projects created by this user
-    let projects = ProjectManager.shared.getProjectsByUID(userId: getUserId())
     var body: some View {
         // Check if given Result<Project> is Empty. if not Empty, the view will
         // be presented with a List of each Project's cell view (ProjectCellView(<Project>))
         // each cell is capable of navigating to the Project detail view (ProjectDetailView(<Project>)).
         // each cell is also capable of
-        if projects.isEmpty
+        
+        if userProjects.isEmpty
         {
             Text("No projects to display.")
         }
@@ -26,7 +30,7 @@ struct ProjectListView: View {
         {
             List
             {
-                ForEach(projects, id: \._id)
+                ForEach(userProjects, id: \._id)
                 {
                     project in
                     
@@ -40,7 +44,7 @@ struct ProjectListView: View {
                             case .project(let project):
                                 ProjectDetailsView(project: project)
                             case .useCase(let useCase):
-                                Text("\(useCase.title)")
+                                UseCaseDetailsView(useCase: useCase)
                         }
                     }
                 }
@@ -50,7 +54,7 @@ struct ProjectListView: View {
                     {
                         index in
                         // delete project at current index
-                        ProjectManager.shared.deleteProject(projects[index])
+                        ProjectManager.shared.deleteProject(userProjects[index])
                     }
                 }
             }.listStyle(.plain)

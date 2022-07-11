@@ -30,23 +30,24 @@ class ProjectManager: ObservableObject
     {
         if let projectToDelete = localRealm.object(ofType: Project.self, forPrimaryKey: project._id)
         {
-            try? localRealm.write
+            if !projectToDelete.useCases.isEmpty
             {
                 for useCase in projectToDelete.useCases
                 {
                     UseCaseManager.shared.deleteUseCase(useCase: useCase)
                 }
+            }
+            try? localRealm.write
+            {
                 localRealm.delete(projectToDelete)
             }
-            
-            //self.projects = ProjectManager.shared.getProjectsByUID(userId: getUserId())
         }
     }
     
     func getProjectsByUID(userId: String) -> Results<Project>
     {
         // retrieve locally stored project by given userId
-        let projects = localRealm.objects(Project.self)
+        @ObservedResults(Project.self) var projects: Results<Project>
         let userProjects = projects.where
         {
             $0.createdBy == userId
@@ -69,7 +70,7 @@ class UseCaseManager
         // attempt to locally save given project
        
         @ObservedResults(Project.self) var projects: Results<Project>
-        var targetProject = projects.first { $0._id == project._id }
+        let targetProject = projects.first { $0._id == project._id }
         try? localRealm.write
         {
             targetProject?.useCases.append(useCase)
@@ -78,11 +79,11 @@ class UseCaseManager
     
     func deleteUseCase(useCase: UseCase) -> Void
     {
-        if let objectToDelete = localRealm.object(ofType: UseCase.self, forPrimaryKey: useCase._id)
+        if let caseToDelete = localRealm.object(ofType: UseCase.self, forPrimaryKey: useCase._id)
         {
             try? localRealm.write
             {
-                localRealm.delete(objectToDelete)
+                localRealm.delete(caseToDelete)
             }
             
             //self.projects = ProjectManager.shared.getProjectsByUID(userId: getUserId())
