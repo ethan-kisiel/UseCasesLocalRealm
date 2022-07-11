@@ -10,50 +10,65 @@ import SwiftUI
 import Neumorphic
 
 struct ProjectsView: View {
+    let userId: String = getUserId()
     @State var title: String = EMPTY_STRING
     @State var projectId: String = EMPTY_STRING
     @State var project: Project?
+    
+    @State var showAddFields: Bool = false
     @FocusState var isFocused: Bool
     
     @ObservedResults(Project.self) var projects: Results<Project>
     var body: some View {
+        HStack(alignment: .top)
+        {
+            Spacer()
+            Image(systemName: showAddFields ? LESS_ICON : MORE_ICON)
+                .onTapGesture {
+                    showAddFields.toggle()
+                }
+        }.padding()
         NavigationStack
         {
-            VStack(spacing: 10)
+            if showAddFields
             {
-                withAnimation
+                VStack(spacing: 10)
                 {
-                    TextInputFieldWithFocus("Title", text: $title, isFocused: $isFocused).padding(8)
-                }
-                withAnimation
-                {
-                    TextInputFieldWithFocus("Project ID", text: $projectId, isFocused: $isFocused).padding(8)
-                }
-                Button(action:
-                {
-                    project = Project(title: title, createdBy: getUserId())
-                    
-                    project!.projectId = projectId
-                    ProjectManager.shared.addProject(project: project!)
-                    
-                    title = EMPTY_STRING
-                    projectId = EMPTY_STRING
-                    isFocused = false
-                })
-                {
-                    Text("Create Project").foregroundColor(title.isEmpty || projectId.isEmpty ? .secondary : .primary)
-                        .fontWeight(.bold)
+                    withAnimation
+                    {
+                        TextInputFieldWithFocus("Title", text: $title, isFocused: $isFocused).padding(8)
+                    }
+                    withAnimation
+                    {
+                        TextInputFieldWithFocus("Project ID", text: $projectId, isFocused: $isFocused).padding(8)
+                    }
+                    Button(action:
+                            {
+                        project = Project(title: title, createdBy: getUserId())
                         
+                        project!.projectId = projectId
+                        ProjectManager.shared.addProject(project: project!)
+                        
+                        title = EMPTY_STRING
+                        projectId = EMPTY_STRING
+                        isFocused = false
+                    })
+                    {
+                        Text("Create Project").foregroundColor(title.isEmpty || projectId.isEmpty ? .secondary : .primary)
+                            .fontWeight(.bold)
+                        
+                    }
+                    .softButtonStyle(RoundedRectangle(cornerRadius: CGFloat(15)))
+                    .disabled(title.isEmpty || projectId.isEmpty)
+                    .frame(maxWidth: .greatestFiniteMagnitude)
                 }
-                .softButtonStyle(RoundedRectangle(cornerRadius: CGFloat(15)))
-                .disabled(title.isEmpty || projectId.isEmpty)
-                .frame(maxWidth: .greatestFiniteMagnitude)
             }
             
             Spacer()
             ProjectListView()
             Spacer()
                 .navigationTitle("Projects")
+                .navigationBarTitleDisplayMode(.inline)
         }.padding(10)
     }
 }

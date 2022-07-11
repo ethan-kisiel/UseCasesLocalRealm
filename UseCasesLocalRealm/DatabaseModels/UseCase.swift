@@ -23,7 +23,7 @@ class UseCase: Object, Identifiable
     
     convenience init(title: String, projectId: ObjectId, priority: Priority)
     {
-        // underProject takes a project's _id: ObjectId as projectId
+        // underProject takes a project's _id: ObjectId as the projectId parameter
         self.init()
         self.underProject = projectId
         self.title = title

@@ -20,7 +20,7 @@ struct UseCasesListView: View {
     var projectUseCases: [UseCase]
     {
         // filter observed results to get only project cases
-        return useCases.filter { $0.underProject == project._id}
+        return useCases.filter { $0.underProject == project._id }
     }
     
     var completeUseCases: [UseCase]
@@ -40,18 +40,26 @@ struct UseCasesListView: View {
             {
                 section in
                 let filteredCases = section == .incomplete ? incompleteUseCases : completeUseCases
-                
+                Spacer()
                 Section
                 {
                     if filteredCases.isEmpty
                     {
-                        Text("No \(section.rawValue) use cases to show.")
+                        Text("No \(section.rawValue) use cases to display.")
                             .foregroundColor(.secondary)
                             .opacity(0.5)
-                        Spacer()
                     }
                     else
                     {
+                        switch section
+                        {
+                        case .incomplete:
+                            Text("Icomplete use cases:")
+                                .fontWeight(.semibold)
+                        case .complete:
+                            Text("Complete use cases:")
+                                .fontWeight(.semibold)
+                        }
                         ForEach(filteredCases, id: \._id)
                         {
                             useCase in
@@ -66,7 +74,6 @@ struct UseCasesListView: View {
                                 UseCaseManager.shared.deleteUseCase(useCase: filteredCases[index])
                             }
                         }
-                        Spacer()
                     }
                 }
             }

@@ -14,6 +14,9 @@ let USER_ID_STRING: String = "UserId"
 let TRASH_ICON: String = "trash.circle.fill"
 let UNCHECKED_ICON: String = "square"
 let CHECKED_ICON: String = "square.inset.filled"
+let MORE_ICON: String = "ellipsis.circle"
+let LESS_ICON: String = "minus.circle"
+
 
 enum Priority: String, CaseIterable, PersistableEnum
 {

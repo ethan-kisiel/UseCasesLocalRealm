@@ -17,56 +17,68 @@ struct ProjectDetailsView: View {
     
     @State var useCase: UseCase?
     
+    @State var showAddFields: Bool = false
     @FocusState var isFocused: Bool
     
     var body: some View {
-        Text("ID: \(project.projectId)")
-            .fontWeight(.semibold)
-
-            VStack(spacing: 5)
+            HStack(alignment: .top)
             {
-                Picker("Priority:", selection: $priority)
-                {
-                    ForEach(Priority.allCases, id: \.self)
-                    {
-                        priority in
-                        Text(priority.rawValue)
+                Text("ID: \(project.projectId)")
+                    .fontWeight(.semibold)
+                Spacer()
+                Image(systemName: showAddFields ? LESS_ICON : MORE_ICON)
+                    .onTapGesture {
+                        showAddFields.toggle()
                     }
-                }
-                .pickerStyle(.segmented)
-                .padding(5)
-                
-                withAnimation
+            }.padding()
+
+            if showAddFields
+            {
+                VStack(spacing: 5)
                 {
-                    TextInputFieldWithFocus("Title", text: $title, isFocused: $isFocused).padding(8)
-                }
-                withAnimation
-                {
-                    TextInputFieldWithFocus("Case ID", text: $caseId, isFocused: $isFocused).padding(8)
-                }
-            
-                Button(action:
-                {
-                    useCase = UseCase(title: title, projectId: project._id, priority: priority)
+                    Picker("Priority:", selection: $priority)
+                    {
+                        ForEach(Priority.allCases, id: \.self)
+                        {
+                            priority in
+                            Text(priority.rawValue)
+                        }
+                    }
+                    .pickerStyle(.segmented)
+                    .padding(5)
                     
-                    UseCaseManager.shared.addUseCase(project: project, useCase: useCase!)
-                    title = EMPTY_STRING
-                    caseId = EMPTY_STRING
-                    priority = .medium
-                    isFocused = false
-                })
-                {
-                    Text("Add Use Case").foregroundColor(title.isEmpty || caseId.isEmpty ? .secondary : .primary)
-                        .fontWeight(.bold)
+                    withAnimation
+                    {
+                        TextInputFieldWithFocus("Title", text: $title, isFocused: $isFocused).padding(8)
+                    }
+                    withAnimation
+                    {
+                        TextInputFieldWithFocus("Case ID", text: $caseId, isFocused: $isFocused).padding(8)
+                    }
+                    
+                    Button(action:
+                            {
+                        useCase = UseCase(title: title, projectId: project._id, priority: priority)
                         
+                        UseCaseManager.shared.addUseCase(project: project, useCase: useCase!)
+                        title = EMPTY_STRING
+                        caseId = EMPTY_STRING
+                        priority = .medium
+                        isFocused = false
+                    })
+                    {
+                        Text("Add Use Case").foregroundColor(title.isEmpty || caseId.isEmpty ? .secondary : .primary)
+                            .fontWeight(.bold)
+                        
+                    }
+                    .softButtonStyle(RoundedRectangle(cornerRadius: CGFloat(15)))
+                    .disabled(title.isEmpty || caseId.isEmpty)
+                    .frame(maxWidth: .greatestFiniteMagnitude)
                 }
-                .softButtonStyle(RoundedRectangle(cornerRadius: CGFloat(15)))
-                .disabled(title.isEmpty || caseId.isEmpty)
-                .frame(maxWidth: .greatestFiniteMagnitude)
-                 
-                UseCasesListView(project: project)
             }
         
+            Spacer()
+            UseCasesListView(project: project)
             Spacer()
                 .navigationTitle(project.title)
                 .navigationBarTitleDisplayMode(.inline)
