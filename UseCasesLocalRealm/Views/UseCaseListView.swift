@@ -9,11 +9,12 @@ import RealmSwift
 import SwiftUI
 enum Sections: String, CaseIterable
 {
-    case incomplete = "incomplete"
-    case complete = "complete"
+    case incomplete
+    case complete
 }
 
-struct UseCaseListView: View {
+struct UseCaseListView: View
+{
     // takes project for filter query purposes
     @State var project: Project
     @ObservedResults(UseCase.self) var useCases: Results<UseCase>
@@ -22,18 +23,19 @@ struct UseCaseListView: View {
         // filter observed results to get only project cases
         return useCases.filter { $0.underProject == project._id }
     }
-    
+
     var completeUseCases: [UseCase]
     {
         return projectUseCases.filter { $0.isComplete == true }
     }
+
     var incompleteUseCases: [UseCase]
     {
         return projectUseCases.filter { $0.isComplete == false }
     }
 
-    
-    var body: some View {
+    var body: some View
+    {
         List
         {
             ForEach(Sections.allCases, id: \.self)
@@ -85,8 +87,10 @@ struct UseCaseListView: View {
     }
 }
 
-struct UseCasesListView_Previews: PreviewProvider {
-    static var previews: some View {
+struct UseCasesListView_Previews: PreviewProvider
+{
+    static var previews: some View
+    {
         let project: Project = Project()
         UseCaseListView(project: project)
     }

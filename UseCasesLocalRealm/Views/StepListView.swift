@@ -5,10 +5,11 @@
 //  Created by Ethan Kisiel on 7/11/22.
 //
 
-import SwiftUI
 import RealmSwift
+import SwiftUI
 
-struct StepListView: View {
+struct StepListView: View
+{
     @State var useCase: UseCase
     @ObservedResults(Step.self) var steps: Results<Step>
 
@@ -16,8 +17,9 @@ struct StepListView: View {
     {
         steps.filter { $0.useCaseId == useCase._id }
     }
-    
-    var body: some View {
+
+    var body: some View
+    {
         if useCaseSteps.isEmpty
         {
             Text("No steps to display.")
@@ -26,7 +28,7 @@ struct StepListView: View {
         {
             List
             {
-                ForEach(useCaseSteps, id:\._id)
+                ForEach(useCaseSteps, id: \._id)
                 {
                     step in
                     StepCellView(step: step)
@@ -46,9 +48,11 @@ struct StepListView: View {
     }
 }
 
-struct StepListView_Previews: PreviewProvider {
-    static var previews: some View {
-        let useCase = UseCase(title:"", projectId: ObjectId(), priority: .medium)
+struct StepListView_Previews: PreviewProvider
+{
+    static var previews: some View
+    {
+        let useCase = UseCase(title: "", projectId: ObjectId(), priority: .medium)
         StepListView(useCase: useCase)
     }
 }

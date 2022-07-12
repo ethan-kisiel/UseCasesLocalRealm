@@ -9,15 +9,17 @@ import Neumorphic
 import RealmSwift
 import SwiftUI
 
-struct UseCaseDetailsView: View {
+struct UseCaseDetailsView: View
+{
     @State var useCase: UseCase
     @State var showAddFields: Bool = false
     @FocusState var isFocused: Bool
-    
+
     @State var text: String = EMPTY_STRING
     @State var stepId: String = EMPTY_STRING
-    
-    var body: some View {
+
+    var body: some View
+    {
         HStack(alignment: .top)
         {
             Text("ID: \(useCase.caseId)")
@@ -42,20 +44,19 @@ struct UseCaseDetailsView: View {
                 {
                     TextInputFieldWithFocus("ID", text: $stepId, isFocused: $isFocused).padding(8)
                 }
-                
+
                 Button(action:
-                {
-                    let step = Step(text: text, useCaseId: useCase._id)
-                    step.stepId = stepId
-                    StepManager.shared.addStep(useCase: useCase, step: step)
-                    text = EMPTY_STRING
-                    stepId = EMPTY_STRING
-                    isFocused = false
-                })
+                    {
+                        let step = Step(text: text, useCaseId: useCase._id)
+                        step.stepId = stepId
+                        StepManager.shared.addStep(useCase: useCase, step: step)
+                        text = EMPTY_STRING
+                        stepId = EMPTY_STRING
+                        isFocused = false
+                    })
                 {
                     Text("Add Step").foregroundColor(text.isEmpty ? .secondary : .primary)
                         .fontWeight(.bold).frame(maxWidth: .infinity)
-                    
                 }
                 .softButtonStyle(RoundedRectangle(cornerRadius: CGFloat(15)))
                 .disabled(text.isEmpty)
@@ -64,12 +65,14 @@ struct UseCaseDetailsView: View {
         Spacer()
         StepListView(useCase: useCase)
         Spacer().navigationTitle("(Use Case) " + useCase.caseId.shorten(by: DISP_SHORT))
-                .navigationBarTitleDisplayMode(.inline)
+            .navigationBarTitleDisplayMode(.inline)
     }
 }
 
-struct UseCaseDetailsView_Previews: PreviewProvider {
-    static var previews: some View {
+struct UseCaseDetailsView_Previews: PreviewProvider
+{
+    static var previews: some View
+    {
         let useCase = UseCase(title: "title", projectId: ObjectId(), priority: .medium)
         UseCaseDetailsView(useCase: useCase)
     }

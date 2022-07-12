@@ -8,22 +8,24 @@
 import RealmSwift
 import SwiftUI
 
-struct ProjectListView: View {
-    
+struct ProjectListView: View
+{
     let userId: String = getUserId()
     @ObservedResults(Project.self) var projectResults: Results<Project>
     var userProjects: [Project]
     {
         return projectResults.filter { $0.createdBy == userId }
     }
+
     // get only projects created by this user
-    var body: some View {
+    var body: some View
+    {
         // if there are projects saved to the localDB with a createdBy
         // value equal to the current userId, those projects will be
         // looped through and presented as a ProjectCellView in the loop.
         // sliding to delete will cause the element at the current index to
         // be deleted using the ProjectManager.
-        
+
         if userProjects.isEmpty
         {
             Text("No projects to display.")
@@ -37,7 +39,8 @@ struct ProjectListView: View {
                     project in
                     ProjectCellView(project: project)
                 }
-                .onDelete {
+                .onDelete
+                {
                     indexSet in
                     indexSet.forEach
                     {
@@ -47,13 +50,15 @@ struct ProjectListView: View {
                     }
                 }
             }.listStyle(.plain)
-                .padding()
+            .padding()
         }
     }
 }
 
-struct ProjectListView_Previews: PreviewProvider {
-    static var previews: some View {
+struct ProjectListView_Previews: PreviewProvider
+{
+    static var previews: some View
+    {
         ProjectListView()
     }
 }

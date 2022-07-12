@@ -5,8 +5,8 @@
 //  Created by Ethan Kisiel on 7/7/22.
 //
 
-import SwiftUI
 import Neumorphic
+import SwiftUI
 
 enum Route: Hashable
 {
@@ -17,27 +17,29 @@ enum Route: Hashable
 }
 
 @main
-struct UseCasesLocalRealmApp: App {
+struct UseCasesLocalRealmApp: App
+{
     let userId: String = getUserId()
-    
-    var body: some Scene {
+
+    var body: some Scene
+    {
         WindowGroup
         {
             NavigationStack
             {
                 ProjectsView()
-                .navigationDestination(for: Route.self)
-                { route in
-                    switch route
-                    {
+                    .navigationDestination(for: Route.self)
+                    { route in
+                        switch route
+                        {
                         case .projects:
                             ProjectsView()
-                        case .project(let project):
+                        case let .project(project):
                             ProjectDetailsView(project: project)
-                        case .useCase(let useCase):
+                        case let .useCase(useCase):
                             UseCaseDetailsView(useCase: useCase)
+                        }
                     }
-                }
             }
         }
     }
