@@ -29,8 +29,7 @@ struct ProjectsView: View {
                         showAddFields.toggle()
                     }
             }.padding()
-            //NavigationStack
-            //{
+            
             if showAddFields
             {
                 VStack(spacing: 10)
@@ -45,9 +44,8 @@ struct ProjectsView: View {
                     }
                     Button(action:
                             {
-                        project = Project(title: title, createdBy: getUserId())
+                        project = Project(title: title, projectId: projectId)
                         
-                        project!.projectId = projectId
                         ProjectManager.shared.addProject(project: project!)
                         
                         title = EMPTY_STRING
@@ -69,8 +67,6 @@ struct ProjectsView: View {
             Spacer()
                 .navigationTitle("Projects")
                 .navigationBarTitleDisplayMode(.inline)
-            //}.padding(10)
-            
         }
     }
 }

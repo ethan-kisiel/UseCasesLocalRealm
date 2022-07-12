@@ -17,6 +17,8 @@ let CHECKED_ICON: String = "square.inset.filled"
 let MORE_ICON: String = "ellipsis.circle"
 let LESS_ICON: String = "minus.circle"
 
+// character amount to shorten display title to if display title > DT_SHORT
+let DISP_SHORT: Int = 10
 enum Priority: String, CaseIterable, PersistableEnum
 {
     case low = "Low"

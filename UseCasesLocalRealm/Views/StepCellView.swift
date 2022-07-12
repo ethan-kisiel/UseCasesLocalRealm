@@ -31,14 +31,9 @@ struct StepCellView: View {
             
             Text(step.text)
             Spacer()
-            let stepId = step.stepId
+            let stepId = step.stepId.shorten(by: 3)
             
-            if let range = stepId.startIndex..<(stepId.index( stepId.startIndex, offsetBy: 3, limitedBy: stepId.endIndex) ?? stepId.endIndex)
-            {
-                
-                let subProjectId = stepId.count <= 3 ? stepId : stepId[range] + "..."
-                Text(subProjectId)
-            }
+            Text(stepId)
         }
     }
 }

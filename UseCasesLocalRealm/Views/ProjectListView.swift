@@ -18,10 +18,11 @@ struct ProjectListView: View {
     }
     // get only projects created by this user
     var body: some View {
-        // Check if given Result<Project> is Empty. if not Empty, the view will
-        // be presented with a List of each Project's cell view (ProjectCellView(<Project>))
-        // each cell is capable of navigating to the Project detail view (ProjectDetailView(<Project>)).
-        // each cell is also capable of
+        // if there are projects saved to the localDB with a createdBy
+        // value equal to the current userId, those projects will be
+        // looped through and presented as a ProjectCellView in the loop.
+        // sliding to delete will cause the element at the current index to
+        // be deleted using the ProjectManager.
         
         if userProjects.isEmpty
         {

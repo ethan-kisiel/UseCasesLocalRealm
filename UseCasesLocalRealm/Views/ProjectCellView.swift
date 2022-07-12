@@ -12,7 +12,7 @@ struct ProjectCellView: View
 {
     @ObservedResults(Project.self) var projects: Results<Project>
     @State var trashIsEnabled: Bool = false
-    
+
     let project: Project
     var body: some View
     {
@@ -21,38 +21,37 @@ struct ProjectCellView: View
             HStack(alignment: .center)
             {
                 // Constants.TRASH_ICON: String
-                Image(systemName: TRASH_ICON).foregroundColor(trashIsEnabled ? .red: .gray)
+                // Tap-hold gesture enables trashIsEnabled boolean
+                // when trashIsEnabled is true, a tap gesture on the Image
+                // will cause project to be deleted from the localRealm DB
+
+                Image(systemName: TRASH_ICON).foregroundColor(trashIsEnabled ? .red : .gray)
                     .disabled(trashIsEnabled)
                     .onLongPressGesture(minimumDuration: 0.8)
-                {
-                    trashIsEnabled.toggle()
-                }
-                .onTapGesture
-                {
-                    if trashIsEnabled
                     {
-                        ProjectManager.shared.deleteProject(project)
+                        trashIsEnabled.toggle()
                     }
-                }
-                
+                    .onTapGesture
+                    {
+                        if trashIsEnabled
+                        {
+                            ProjectManager.shared.deleteProject(project)
+                        }
+                    }
 
                 Text(project.title)
                 Spacer()
                 let projectId = project.projectId
-                
-                if let range = projectId.startIndex..<(projectId.index( projectId.startIndex, offsetBy: 3, limitedBy: projectId.endIndex) ?? projectId.endIndex)
-                {
-                    
-                    let subProjectId = projectId[range] + "..."
-                    Text(subProjectId)
-                }
+                Text(projectId.shorten(by: 3))
             }
         }
     }
 }
 
-struct ProjectCellView_Previews: PreviewProvider {
-    static var previews: some View {
+struct ProjectCellView_Previews: PreviewProvider
+{
+    static var previews: some View
+    {
         ProjectCellView(project: Project())
     }
 }

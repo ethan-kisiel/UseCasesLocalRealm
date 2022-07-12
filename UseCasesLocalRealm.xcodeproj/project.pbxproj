@@ -14,7 +14,6 @@
 		8805F60828773CCE000DE99F /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 8805F60728773CCE000DE99F /* Realm */; };
 		8805F60A28773CCE000DE99F /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 8805F60928773CCE000DE99F /* RealmSwift */; };
 		8805F60C28773D6E000DE99F /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8805F60B28773D6E000DE99F /* Project.swift */; };
-		8805F61028776C69000DE99F /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8805F60F28776C69000DE99F /* MainViewModel.swift */; };
 		8805F61228776F48000DE99F /* LocalRealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8805F61128776F48000DE99F /* LocalRealmManager.swift */; };
 		8805F614287773A9000DE99F /* TextInputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8805F613287773A9000DE99F /* TextInputField.swift */; };
 		8805F6162877746B000DE99F /* TextInputFieldWithFocus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8805F6152877746B000DE99F /* TextInputFieldWithFocus.swift */; };
@@ -30,6 +29,8 @@
 		88672AC0287C627E009129DD /* UseCaseDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88672ABF287C627E009129DD /* UseCaseDetailsView.swift */; };
 		88672AC2287C95A1009129DD /* StepListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88672AC1287C95A1009129DD /* StepListView.swift */; };
 		88672AC4287C95DD009129DD /* StepCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88672AC3287C95DD009129DD /* StepCellView.swift */; };
+		88672AC7287CF4A5009129DD /* UserIdHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88672AC6287CF4A5009129DD /* UserIdHelper.swift */; };
+		88672ACC287CF7AC009129DD /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88672ACB287CF7AC009129DD /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,7 +40,6 @@
 		8805F5FA28773B5E000DE99F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		8805F60128773C1C000DE99F /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		8805F60B28773D6E000DE99F /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
-		8805F60F28776C69000DE99F /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		8805F61128776F48000DE99F /* LocalRealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalRealmManager.swift; sourceTree = "<group>"; };
 		8805F613287773A9000DE99F /* TextInputField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextInputField.swift; sourceTree = "<group>"; };
 		8805F6152877746B000DE99F /* TextInputFieldWithFocus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextInputFieldWithFocus.swift; sourceTree = "<group>"; };
@@ -54,6 +54,8 @@
 		88672ABF287C627E009129DD /* UseCaseDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseCaseDetailsView.swift; sourceTree = "<group>"; };
 		88672AC1287C95A1009129DD /* StepListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepListView.swift; sourceTree = "<group>"; };
 		88672AC3287C95DD009129DD /* StepCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepCellView.swift; sourceTree = "<group>"; };
+		88672AC6287CF4A5009129DD /* UserIdHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserIdHelper.swift; sourceTree = "<group>"; };
+		88672ACB287CF7AC009129DD /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,10 +91,11 @@
 		8805F5F228773B5D000DE99F /* UseCasesLocalRealm */ = {
 			isa = PBXGroup;
 			children = (
+				88672ACA287CF79D009129DD /* Extensions */,
+				88672AC5287CF489009129DD /* Helpers */,
 				8805F61D2877A89B000DE99F /* RealmManagers */,
 				8805F613287773A9000DE99F /* TextInputField.swift */,
 				8805F60528773C58000DE99F /* DatabaseModels */,
-				8805F60428773C46000DE99F /* ViewModels */,
 				8805F60328773C3D000DE99F /* Views */,
 				8805F5F328773B5D000DE99F /* UseCasesLocalRealmApp.swift */,
 				8805F5F728773B5E000DE99F /* Assets.xcassets */,
@@ -127,14 +130,6 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		8805F60428773C46000DE99F /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-				8805F60F28776C69000DE99F /* MainViewModel.swift */,
-			);
-			path = ViewModels;
-			sourceTree = "<group>";
-		};
 		8805F60528773C58000DE99F /* DatabaseModels */ = {
 			isa = PBXGroup;
 			children = (
@@ -151,6 +146,22 @@
 				8805F61128776F48000DE99F /* LocalRealmManager.swift */,
 			);
 			path = RealmManagers;
+			sourceTree = "<group>";
+		};
+		88672AC5287CF489009129DD /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				88672AC6287CF4A5009129DD /* UserIdHelper.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		88672ACA287CF79D009129DD /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				88672ACB287CF7AC009129DD /* Extensions.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -235,9 +246,11 @@
 				88672ABC287B8F99009129DD /* UseCaseListView.swift in Sources */,
 				8805F614287773A9000DE99F /* TextInputField.swift in Sources */,
 				88672AC4287C95DD009129DD /* StepCellView.swift in Sources */,
+				88672AC7287CF4A5009129DD /* UserIdHelper.swift in Sources */,
 				8805F61228776F48000DE99F /* LocalRealmManager.swift in Sources */,
 				8805F6252878ED61000DE99F /* Step.swift in Sources */,
 				88672AB52879143F009129DD /* ProjectsView.swift in Sources */,
+				88672ACC287CF7AC009129DD /* Extensions.swift in Sources */,
 				8805F5F428773B5D000DE99F /* UseCasesLocalRealmApp.swift in Sources */,
 				8805F61A2877826C000DE99F /* UseCase.swift in Sources */,
 				8805F60228773C1C000DE99F /* Constants.swift in Sources */,
@@ -248,7 +261,6 @@
 				8805F60C28773D6E000DE99F /* Project.swift in Sources */,
 				88672AC2287C95A1009129DD /* StepListView.swift in Sources */,
 				88672AC0287C627E009129DD /* UseCaseDetailsView.swift in Sources */,
-				8805F61028776C69000DE99F /* MainViewModel.swift in Sources */,
 				8805F623287890A8000DE99F /* ProjectDetailsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

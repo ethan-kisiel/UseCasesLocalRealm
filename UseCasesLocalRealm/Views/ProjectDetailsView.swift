@@ -80,7 +80,7 @@ struct ProjectDetailsView: View {
             Spacer()
             UseCaseListView(project: project)
             Spacer()
-                .navigationTitle(project.title)
+            .navigationTitle("(Project) " + project.title.shorten(by: DISP_SHORT))
                 .navigationBarTitleDisplayMode(.inline)
     }
 }

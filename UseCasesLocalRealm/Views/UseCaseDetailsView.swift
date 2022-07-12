@@ -63,7 +63,7 @@ struct UseCaseDetailsView: View {
         }
         Spacer()
         StepListView(useCase: useCase)
-        Spacer().navigationTitle("\(useCase.caseId)")
+        Spacer().navigationTitle("(Use Case) " + useCase.caseId.shorten(by: DISP_SHORT))
                 .navigationBarTitleDisplayMode(.inline)
     }
 }
