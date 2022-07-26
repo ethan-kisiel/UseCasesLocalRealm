@@ -10,6 +10,7 @@
 import Foundation
 import RealmSwift
 
+// MARK: PROJECT MANAGER
 class ProjectManager
 {
     static let shared = ProjectManager()
@@ -47,7 +48,18 @@ class ProjectManager
             }
         }
     }
-
+    
+    func projectLastUpdated(project: Project)
+    {
+        if let projectToUpdate = localRealm.object(ofType: Project.self, forPrimaryKey: project._id)
+        {
+            try? localRealm.write
+            {
+                projectToUpdate.lastUpdated = Date()
+            }
+        }
+    }
+    
     func getProjectsByUID(userId: String) -> Results<Project>
     {
         // retrieve locally stored project by given userId
@@ -60,7 +72,7 @@ class ProjectManager
         return userProjects
     }
 }
-
+// MARK: USE CASE MANAGER
 class UseCaseManager
 {
     static let shared = UseCaseManager()
@@ -73,10 +85,13 @@ class UseCaseManager
         // appends the given useCase to the given project
         // in the local realm database
         
-        let targetProject = localRealm.object(ofType: Project.self, forPrimaryKey: project._id)
-        try? localRealm.write
+        if let targetProject = localRealm.object(ofType: Project.self, forPrimaryKey: project._id)
         {
-            targetProject?.useCases.append(useCase)
+            try? localRealm.write
+            {
+                targetProject.useCases.append(useCase)
+                targetProject.lastUpdated = Date()
+            }
         }
     }
 
@@ -86,6 +101,9 @@ class UseCaseManager
         
         if let caseToDelete = localRealm.object(ofType: UseCase.self, forPrimaryKey: useCase._id)
         {
+            // caseToDelete.underProject.lastUpdated = Date()
+            // ^ use after fixing  parent - child relationship
+            
             if !caseToDelete.steps.isEmpty
             {
                 for step in caseToDelete.steps
@@ -100,6 +118,22 @@ class UseCaseManager
         }
     }
 
+    func useCaseLastUpdated(useCase: UseCase)
+    {
+        if let useCaseToUpdate = localRealm.object(ofType: UseCase.self, forPrimaryKey: useCase._id)
+        {
+            //ProjectManager.shared.projectLastUpdated(project: useCas.parentProject)
+            try? localRealm.write
+            {
+                useCaseToUpdate.lastUpdated = Date()
+                if let project = useCaseToUpdate.parentProject[0]
+                {
+                    ProjectManager.shared.projectLastUpdated(project: project)
+                }
+            }
+        }
+    }
+    
     func toggleUseCaseCompleteness(useCase: UseCase)
     {
         // this function simply toggles the useCase.isComplete boolean within
@@ -110,11 +144,12 @@ class UseCaseManager
             try? localRealm.write
             {
                 useCaseToUpdate.isComplete.toggle()
+                useCase.lastUpdated = Date()
             }
         }
     }
 }
-
+// MARK: STEP MANAGER
 class StepManager
 {
     static let shared = StepManager()
@@ -124,13 +159,16 @@ class StepManager
     func addStep(useCase: UseCase, step: Step)
     {
         // Same implimentation as ProjectManager.addUseCase
-        let targetUseCase = localRealm.object(ofType: UseCase.self, forPrimaryKey: useCase._id)
-        try? localRealm.write
+        if let targetUseCase = localRealm.object(ofType: UseCase.self, forPrimaryKey: useCase._id)
         {
-            targetUseCase?.steps.append(step)
+            try? localRealm.write
+            {
+                targetUseCase.steps.append(step)
+                targetUseCase.lastUpdated = Date()
+            }
         }
     }
-
+    
     func deleteStep(step: Step)
     {
         // Same implimentation as ProjectManager.deleteProject()
@@ -140,6 +178,24 @@ class StepManager
             try? localRealm.write
             {
                 localRealm.delete(stepToDelete)
+            }
+        }
+    }
+    
+    func stepLastUpdated(step: Step)
+    {
+        // update given step's lastUpdated property to the current date
+        // then make call to UseCaseManager.shared to update the
+        // given step's parentUseCase's lastUpdated property
+        if let stepToUpdate = localRealm.object(ofType: Step.self, forPrimaryKey: step._id)
+        {
+            try? localRealm.write
+            {
+                stepToUpdate.lastUpdated = Date()
+                if let useCase = stepToUpdate.parentUseCase[0]
+                {
+                    UseCaseManager.shared.useCaseLastUpdated(useCase: useCase)
+                }
             }
         }
     }

@@ -25,7 +25,7 @@ struct ProjectListView: View
         // looped through and presented as a ProjectCellView in the loop.
         // sliding to delete will cause the element at the current index to
         // be deleted using the ProjectManager.
-
+        
         if userProjects.isEmpty
         {
             Text("No projects to display.")
