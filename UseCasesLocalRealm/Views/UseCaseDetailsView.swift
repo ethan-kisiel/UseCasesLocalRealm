@@ -47,7 +47,7 @@ struct UseCaseDetailsView: View
 
                 Button(action:
                     {
-                        let step = Step(text: text, useCaseId: useCase._id)
+                        let step = Step(text: text)
                         step.stepId = stepId
                         StepManager.shared.addStep(useCase: useCase, step: step)
                         text = EMPTY_STRING
@@ -73,7 +73,7 @@ struct UseCaseDetailsView_Previews: PreviewProvider
 {
     static var previews: some View
     {
-        let useCase = UseCase(title: "title", projectId: ObjectId(), priority: .medium)
+        let useCase = UseCase(title: "title", priority: .medium)
         UseCaseDetailsView(useCase: useCase)
     }
 }

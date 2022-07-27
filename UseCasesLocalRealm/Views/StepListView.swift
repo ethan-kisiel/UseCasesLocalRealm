@@ -52,7 +52,7 @@ struct StepListView_Previews: PreviewProvider
 {
     static var previews: some View
     {
-        let useCase = UseCase(title: "", projectId: ObjectId(), priority: .medium)
+        let useCase = UseCase(title: "", priority: .medium)
         StepListView(useCase: useCase)
     }
 }

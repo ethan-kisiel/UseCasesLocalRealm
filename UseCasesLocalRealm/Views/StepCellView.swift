@@ -44,7 +44,7 @@ struct StepCellView_Previews: PreviewProvider
 {
     static var previews: some View
     {
-        let step = Step(text: "", useCaseId: ObjectId())
+        let step = Step(text: "")
         StepCellView(step: step)
     }
 }

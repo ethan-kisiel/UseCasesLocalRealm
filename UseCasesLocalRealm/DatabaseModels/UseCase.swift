@@ -23,9 +23,8 @@ class UseCase: Object, Identifiable
     
     @Persisted(originProperty: "useCases") var parentProject: LinkingObjects<Project>
     
-    convenience init(title: String, project: Project, priority: Priority)
+    convenience init(title: String, priority: Priority)
     {
-        // parentProject takes a Project as the project parameter
         self.init()
         self.title = title
         self.priority = priority
