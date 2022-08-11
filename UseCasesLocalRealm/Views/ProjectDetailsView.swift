@@ -15,7 +15,9 @@ struct ProjectDetailsView: View
     @State var priority: Priority = .medium
     @State var title: String = EMPTY_STRING
     @State var caseId: String = EMPTY_STRING
-
+    // add inline picker for the category selection
+    @State var categoryTitle: String = EMPTY_STRING
+    
     @State var useCase: UseCase?
 
     @State var showAddFields: Bool = false
@@ -39,6 +41,8 @@ struct ProjectDetailsView: View
         {
             VStack(spacing: 5)
             {
+                TextInputFieldWithFocus("Category", text: $categoryTitle, isFocused: $isFocused)
+                
                 Picker("Priority:", selection: $priority)
                 {
                     ForEach(Priority.allCases, id: \.self)
@@ -49,7 +53,7 @@ struct ProjectDetailsView: View
                 }
                 .pickerStyle(.segmented)
                 .padding(5)
-
+                
                 withAnimation
                 {
                     TextInputFieldWithFocus("Use Case", text: $title, isFocused: $isFocused).padding(8)
@@ -60,27 +64,25 @@ struct ProjectDetailsView: View
                 }
 
                 Button(action:
-                    {
-                        useCase = UseCase(title: title, priority: priority)
-                        useCase!.caseId = caseId
-
-                        UseCaseManager.shared.addUseCase(project: project, useCase: useCase!)
-                        title = EMPTY_STRING
-                        caseId = EMPTY_STRING
-                        priority = .medium
-                        isFocused = false
-                    })
+                {
+                    useCase = UseCase(title: title, priority: priority)
+                    useCase!.caseId = caseId
+                    
+                    title = EMPTY_STRING
+                    caseId = EMPTY_STRING
+                    priority = .medium
+                    isFocused = false
+                })
                 {
                     Text("Add Use Case").foregroundColor(title.isEmpty || caseId.isEmpty ? .secondary : .primary)
                         .fontWeight(.bold).frame(maxWidth: .infinity)
                 }
                 .softButtonStyle(RoundedRectangle(cornerRadius: CGFloat(15)))
-                .disabled(title.isEmpty || caseId.isEmpty)
+                .disabled(title.isEmpty || caseId.isEmpty || categoryTitle.isEmpty)
             }.padding()
         }
-
         Spacer()
-        UseCaseListView(project: project)
+        CategoryListView(project: project)
         Spacer()
             .navigationTitle("(Project) " + project.title.shorten(by: DISP_SHORT))
             .navigationBarTitleDisplayMode(.inline)

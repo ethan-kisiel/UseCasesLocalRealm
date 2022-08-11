@@ -13,9 +13,9 @@ struct StepListView: View
     @State var useCase: UseCase
     @ObservedResults(Step.self) var steps: Results<Step>
 
-    var useCaseSteps: [Step]
+    var useCaseSteps: Results<Step>
     {
-        steps.filter { $0.useCaseId == useCase._id }
+        steps.where {$0.parentUseCase._id == useCase._id }
     }
 
     var body: some View

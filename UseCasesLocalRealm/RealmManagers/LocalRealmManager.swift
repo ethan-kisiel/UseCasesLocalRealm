@@ -35,11 +35,11 @@ class ProjectManager
 
         if let projectToDelete = localRealm.object(ofType: Project.self, forPrimaryKey: project._id)
         {
-            if !projectToDelete.useCases.isEmpty
+            if !projectToDelete.categories.isEmpty
             {
-                for useCase in projectToDelete.useCases
+                for category in projectToDelete.categories
                 {
-                    UseCaseManager.shared.deleteUseCase(useCase: useCase)
+                    CategoryManager.shared.deleteCategory(category)
                 }
             }
             try? localRealm.write
@@ -72,30 +72,68 @@ class ProjectManager
         return userProjects
     }
 }
+// MARK: CATEGORY MANAGER
+class CategoryManager
+{
+    static let shared = CategoryManager()
+    let localRealm = try! Realm()
+    
+    func addCategory(project: Project, category: Category)
+    {
+        if let targetProject = localRealm.object(ofType: Project.self, forPrimaryKey: project._id)
+        {
+            try? localRealm.write
+            {
+                targetProject.categories.append(category)
+                // needs to use lastUpdatedFunction
+                //targetProject.lastUpdated = Date()
+            }
+        }
+    }
+    
+    func deleteCategory(_ category: Category)
+    {
+        if let targetCategory = localRealm.object(ofType: Category.self, forPrimaryKey: category._id)
+        {
+            if !targetCategory.useCases.isEmpty
+            {
+                for useCase in targetCategory.useCases
+                {
+                    UseCaseManager.shared.deleteUseCase(useCase)
+                }
+            }
+            try? localRealm.write
+            {
+                localRealm.delete(targetCategory)
+            }
+        }
+    }
+}
 // MARK: USE CASE MANAGER
 class UseCaseManager
 {
     static let shared = UseCaseManager()
 
     let localRealm = try! Realm()
-
-    func addUseCase(project: Project, useCase: UseCase)
+    
+    func addUseCase(category: Category, useCase: UseCase)
     {
         // finds the target project from the given project._id and
         // appends the given useCase to the given project
         // in the local realm database
         
-        if let targetProject = localRealm.object(ofType: Project.self, forPrimaryKey: project._id)
+        if let parentCategory = localRealm.object(ofType: Category.self, forPrimaryKey: category._id)
         {
             try? localRealm.write
             {
-                targetProject.useCases.append(useCase)
-                targetProject.lastUpdated = Date()
+                parentCategory.useCases.append(useCase)
+                // needs to use lastUpdatedFunction
+                //targetProject.lastUpdated = Date()
             }
         }
     }
 
-    func deleteUseCase(useCase: UseCase)
+    func deleteUseCase(_ useCase: UseCase)
     {
         // Same implimentation as ProjectManager.deleteProject()
         
@@ -117,34 +155,16 @@ class UseCaseManager
             }
         }
     }
-
-    func useCaseLastUpdated(useCase: UseCase)
-    {
-        if let useCaseToUpdate = localRealm.object(ofType: UseCase.self, forPrimaryKey: useCase._id)
-        {
-            //ProjectManager.shared.projectLastUpdated(project: useCas.parentProject)
-            try? localRealm.write
-            {
-                useCaseToUpdate.lastUpdated = Date()
-                if let project = useCaseToUpdate.parentProject[0]
-                {
-                    ProjectManager.shared.projectLastUpdated(project: project)
-                }
-            }
-        }
-    }
     
     func toggleUseCaseCompleteness(useCase: UseCase)
     {
         // this function simply toggles the useCase.isComplete boolean within
         // the local realm db
-        
         if let useCaseToUpdate = localRealm.object(ofType: UseCase.self, forPrimaryKey: useCase._id)
         {
             try? localRealm.write
             {
                 useCaseToUpdate.isComplete.toggle()
-                useCase.lastUpdated = Date()
             }
         }
     }
@@ -194,7 +214,7 @@ class StepManager
                 stepToUpdate.lastUpdated = Date()
                 if let useCase = stepToUpdate.parentUseCase[0]
                 {
-                    UseCaseManager.shared.useCaseLastUpdated(useCase: useCase)
+                    //UseCaseManager.shared.useCaseLastUpdated(useCase: useCase)
                 }
             }
         }

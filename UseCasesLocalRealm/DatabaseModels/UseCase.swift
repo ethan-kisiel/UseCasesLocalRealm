@@ -8,7 +8,6 @@
 import Foundation
 import RealmSwift
 
-
 class UseCase: Object, Identifiable
 {
     @Persisted(primaryKey: true) var _id: ObjectId
@@ -18,10 +17,9 @@ class UseCase: Object, Identifiable
     @Persisted var lastUpdated: Date = Date()
     @Persisted var priority: Priority = .medium
     @Persisted var isComplete: Bool = false
-    
     @Persisted var steps: List<Step> = List<Step>()
     
-    @Persisted(originProperty: "useCases") var parentProject: LinkingObjects<Project>
+    @Persisted(originProperty: "useCases") var parentCategory: LinkingObjects<Category>
     
     convenience init(title: String, priority: Priority)
     {

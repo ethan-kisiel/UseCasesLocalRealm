@@ -14,6 +14,7 @@ struct ProjectListView: View
     @ObservedResults(Project.self) var projectResults: Results<Project>
     var userProjects: [Project]
     {
+        
         return projectResults.filter { $0.createdBy == userId }
     }
 
@@ -34,6 +35,7 @@ struct ProjectListView: View
         {
             List
             {
+                // sort by category
                 ForEach(userProjects, id: \._id)
                 {
                     project in

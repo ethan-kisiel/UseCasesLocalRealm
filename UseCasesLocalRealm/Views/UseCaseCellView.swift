@@ -12,7 +12,8 @@ import SwiftUI
 struct UseCaseCellView: View
 {
     @State var useCase: UseCase
-
+    @ObservedResults(UseCase.self) var useCases: Results<UseCase>
+    
     private func priorityBackground(_ priority: Priority) -> Color
     {
         switch priority
