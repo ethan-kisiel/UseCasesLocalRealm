@@ -11,6 +11,7 @@ import SwiftUI
 
 struct UseCaseCellView: View
 {
+
     @State var useCase: UseCase
     @ObservedResults(UseCase.self) var useCases: Results<UseCase>
     
@@ -24,8 +25,6 @@ struct UseCaseCellView: View
             return .orange
         case .high:
             return .red
-        default:
-            return .blue
         }
     }
 
@@ -42,7 +41,6 @@ struct UseCaseCellView: View
                     }
                 Text(useCase.title)
                 Spacer()
-
                 Text(useCase.priority.rawValue)
                     .padding(5)
                     .frame(width: 75)
@@ -58,7 +56,6 @@ struct UseCaseCellView_Previews: PreviewProvider
 {
     static var previews: some View
     {
-        let objectId = ObjectId()
         let useCase = UseCase(title: "preview", priority: .medium)
         UseCaseCellView(useCase: useCase)
     }

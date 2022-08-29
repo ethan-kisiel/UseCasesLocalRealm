@@ -7,11 +7,15 @@
 
 import Neumorphic
 import SwiftUI
+import RealmSwift
 
 struct ProjectDetailsView: View
 {
+    
+    @ObservedResults(Category.self) var categories: Results<Category>
+    
     @State var project: Project
-
+    
     @State var priority: Priority = .medium
     @State var title: String = EMPTY_STRING
     @State var caseId: String = EMPTY_STRING
@@ -41,7 +45,11 @@ struct ProjectDetailsView: View
         {
             VStack(spacing: 5)
             {
-                TextInputFieldWithFocus("Category", text: $categoryTitle, isFocused: $isFocused)
+                withAnimation
+                {
+                    TextInputFieldWithFocus("Category", text: $categoryTitle, isFocused: $isFocused)
+                        .padding(8)
+                }
                 
                 Picker("Priority:", selection: $priority)
                 {
@@ -68,6 +76,21 @@ struct ProjectDetailsView: View
                     useCase = UseCase(title: title, priority: priority)
                     useCase!.caseId = caseId
                     
+                    // if there is a category with the specified title
+                    // the use case is added to that category
+                    // otherwise, a category is created
+                    // and the use case is added
+                    if let targetCategory = categories.first(where: { $0.title == categoryTitle })
+                    {
+                        UseCaseManager.shared.addUseCase(category: targetCategory, useCase: useCase!)
+                    }
+                    else
+                    {
+                        let categoryToAdd = Category(title: categoryTitle)
+                        CategoryManager.shared.addCategory(project: project, category: categoryToAdd)
+                        //categoryToAdd.useCases.append(useCase!)
+                        UseCaseManager.shared.addUseCase(category: categoryToAdd, useCase: useCase!)
+                    }
                     title = EMPTY_STRING
                     caseId = EMPTY_STRING
                     priority = .medium

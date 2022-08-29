@@ -6,25 +6,26 @@
 //
 
 import SwiftUI
+import RealmSwift
 
 struct CategoryListView: View {
     @State var project: Project
+    @ObservedResults(Category.self) var categories: Results<Category>
+    
+    var projectCategories: Results<Category>
+    {
+        categories.where { $0.parentProject._id == project._id }
+    }
     @State var showUseCases: Bool = false
     var body: some View {
         List
         {
-            ForEach(project.categories, id: \.self)
+            ForEach(projectCategories, id: \._id)
             { category in
-                Text(category.title).onTapGesture
-                {
-                    showUseCases.toggle()
-                }
-                if showUseCases
-                {
-                    UseCaseListView(category: category)
-                }
+                CategoryCellView(category: category)
             }
         }
+        .listStyle(.plain)
     }
 }
 

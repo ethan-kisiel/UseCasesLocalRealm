@@ -109,6 +109,8 @@ class CategoryManager
         }
     }
 }
+
+
 // MARK: USE CASE MANAGER
 class UseCaseManager
 {

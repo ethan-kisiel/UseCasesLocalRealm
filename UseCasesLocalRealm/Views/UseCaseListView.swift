@@ -15,7 +15,7 @@ enum Sections: String, CaseIterable
 
 struct UseCaseListView: View
 {
-    // takes project for filter query purposes
+    // takes category for filter query purposes
     @State var category: Category
     @ObservedResults(UseCase.self) var useCases: Results<UseCase>
     var categoryUseCases: Results<UseCase>
