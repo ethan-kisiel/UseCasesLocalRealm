@@ -34,6 +34,7 @@
 		88672AC4287C95DD009129DD /* StepCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88672AC3287C95DD009129DD /* StepCellView.swift */; };
 		88672AC7287CF4A5009129DD /* UserIdHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88672AC6287CF4A5009129DD /* UserIdHelper.swift */; };
 		88672ACC287CF7AC009129DD /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88672ACB287CF7AC009129DD /* Extensions.swift */; };
+		88A29E3D28BD11580068799C /* CategoryDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A29E3C28BD11580068799C /* CategoryDetailsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +63,7 @@
 		88672AC3287C95DD009129DD /* StepCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepCellView.swift; sourceTree = "<group>"; };
 		88672AC6287CF4A5009129DD /* UserIdHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserIdHelper.swift; sourceTree = "<group>"; };
 		88672ACB287CF7AC009129DD /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		88A29E3C28BD11580068799C /* CategoryDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryDetailsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,6 +136,7 @@
 				88672AC3287C95DD009129DD /* StepCellView.swift */,
 				881AFBA528A0401600E5025E /* CategoryListView.swift */,
 				881AFBA728A5849B00E5025E /* CategoryCellView.swift */,
+				88A29E3C28BD11580068799C /* CategoryDetailsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -253,6 +256,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				88672ABC287B8F99009129DD /* UseCaseListView.swift in Sources */,
+				88A29E3D28BD11580068799C /* CategoryDetailsView.swift in Sources */,
 				8805F614287773A9000DE99F /* TextInputField.swift in Sources */,
 				88672AC4287C95DD009129DD /* StepCellView.swift in Sources */,
 				88672AC7287CF4A5009129DD /* UserIdHelper.swift in Sources */,
@@ -402,6 +406,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"UseCasesLocalRealm/Preview Content\"";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -430,6 +435,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"UseCasesLocalRealm/Preview Content\"";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;

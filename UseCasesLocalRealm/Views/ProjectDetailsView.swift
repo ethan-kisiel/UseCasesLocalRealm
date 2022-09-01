@@ -15,15 +15,9 @@ struct ProjectDetailsView: View
     @ObservedResults(Category.self) var categories: Results<Category>
     
     @State var project: Project
-    
-    @State var priority: Priority = .medium
-    @State var title: String = EMPTY_STRING
-    @State var caseId: String = EMPTY_STRING
     // add inline picker for the category selection
     @State var categoryTitle: String = EMPTY_STRING
-    
-    @State var useCase: UseCase?
-
+ 
     @State var showAddFields: Bool = false
     @FocusState var isFocused: Bool
 
@@ -51,57 +45,30 @@ struct ProjectDetailsView: View
                         .padding(8)
                 }
                 
-                Picker("Priority:", selection: $priority)
-                {
-                    ForEach(Priority.allCases, id: \.self)
-                    {
-                        priority in
-                        Text(priority.rawValue)
-                    }
-                }
-                .pickerStyle(.segmented)
-                .padding(5)
-                
-                withAnimation
-                {
-                    TextInputFieldWithFocus("Use Case", text: $title, isFocused: $isFocused).padding(8)
-                }
-                withAnimation
-                {
-                    TextInputFieldWithFocus("ID", text: $caseId, isFocused: $isFocused).padding(8)
-                }
-
                 Button(action:
                 {
-                    useCase = UseCase(title: title, priority: priority)
-                    useCase!.caseId = caseId
-                    
                     // if there is a category with the specified title
                     // the use case is added to that category
                     // otherwise, a category is created
                     // and the use case is added
                     if let targetCategory = categories.first(where: { $0.title == categoryTitle })
                     {
-                        UseCaseManager.shared.addUseCase(category: targetCategory, useCase: useCase!)
+                        return
                     }
                     else
                     {
                         let categoryToAdd = Category(title: categoryTitle)
                         CategoryManager.shared.addCategory(project: project, category: categoryToAdd)
-                        //categoryToAdd.useCases.append(useCase!)
-                        UseCaseManager.shared.addUseCase(category: categoryToAdd, useCase: useCase!)
                     }
-                    title = EMPTY_STRING
-                    caseId = EMPTY_STRING
-                    priority = .medium
+                    categoryTitle = EMPTY_STRING
                     isFocused = false
                 })
                 {
-                    Text("Add Use Case").foregroundColor(title.isEmpty || caseId.isEmpty ? .secondary : .primary)
+                    Text("Add Category").foregroundColor(categoryTitle.isEmpty ? .secondary : .primary)
                         .fontWeight(.bold).frame(maxWidth: .infinity)
                 }
                 .softButtonStyle(RoundedRectangle(cornerRadius: CGFloat(15)))
-                .disabled(title.isEmpty || caseId.isEmpty || categoryTitle.isEmpty)
+                .disabled(categoryTitle.isEmpty)
             }.padding()
         }
         Spacer()

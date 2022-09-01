@@ -9,25 +9,11 @@ import SwiftUI
 import RealmSwift
 
 struct CategoryCellView: View {
-    @ObservedResults(Category.self) var categories: Results<Category>
-    var category: Category
+    let category: Category
     
-    @State var showCategories: Bool = false
     var body: some View
     {
-        if showCategories
-        {
-            Image(systemName: MORE_ICON)
-                .onTapGesture
-                {
-                    showCategories.toggle()
-                }
-            Text(category.title)
-        }
-        else
-        {
-            //UseCaseListView(category: category)
-        }
+        Text(category.title)
     }
 }
 
