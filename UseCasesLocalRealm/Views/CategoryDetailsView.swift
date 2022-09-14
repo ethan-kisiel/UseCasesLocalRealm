@@ -22,6 +22,20 @@ struct CategoryDetailsView: View {
     
     var body: some View
     {
+        // This is the
+        HStack(alignment: .top)
+        {
+            // TODO: Add user made id for category
+            Text("ID: \(category._id)")
+                .fontWeight(.semibold)
+            Spacer()
+            Image(systemName: showAddFields ? LESS_ICON : MORE_ICON)
+                .onTapGesture
+                {
+                    showAddFields.toggle()
+                }
+        }.padding()
+        
         if showAddFields
         {
             VStack(spacing: 5)
@@ -50,7 +64,7 @@ struct CategoryDetailsView: View {
                 {
                     useCase = UseCase(title: title, priority: priority)
                     useCase!.caseId = caseId
-                    
+                    UseCaseManager.shared.addUseCase(category: category, useCase: useCase!)
                     title = EMPTY_STRING
                     caseId = EMPTY_STRING
                     priority = .medium
@@ -64,7 +78,11 @@ struct CategoryDetailsView: View {
                 .disabled(title.isEmpty || caseId.isEmpty )
             }.padding()
         }
+        Spacer()
         UseCaseListView(category: category)
+        Spacer()
+            .navigationTitle("(Cateogry) " + category.title.shorten(by: DISP_SHORT))
+            .navigationBarTitleDisplayMode(.inline)
     }
 }
 

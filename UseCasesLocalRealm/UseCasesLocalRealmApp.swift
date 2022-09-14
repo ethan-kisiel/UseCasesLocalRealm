@@ -13,6 +13,7 @@ enum Route: Hashable
     // projects takes the user id string from user defaults
     case projects
     case project(Project)
+    case category(Category)
     case useCase(UseCase)
 }
 
@@ -36,6 +37,8 @@ struct UseCasesLocalRealmApp: App
                             ProjectsView()
                         case let .project(project):
                             ProjectDetailsView(project: project)
+                        case let .category(category):
+                            CategoryDetailsView(category: category)
                         case let .useCase(useCase):
                             UseCaseDetailsView(useCase: useCase)
                         }

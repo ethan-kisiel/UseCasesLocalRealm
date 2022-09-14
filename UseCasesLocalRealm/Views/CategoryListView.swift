@@ -24,6 +24,14 @@ struct CategoryListView: View {
             { category in
                 CategoryCellView(category: category)
             }
+            .onDelete
+            { indexSet in
+                indexSet.forEach
+                { index in
+                    CategoryManager.shared.deleteCategory(projectCategories[index])
+                }
+                
+            }
         }
         .listStyle(.plain)
     }
