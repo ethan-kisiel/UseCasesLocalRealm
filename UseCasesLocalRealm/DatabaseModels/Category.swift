@@ -11,6 +11,7 @@ import RealmSwift
 class Category: Object, Identifiable
 {
     @Persisted(primaryKey: true) var _id: ObjectId
+    @Persisted var categoryId: String
     @Persisted var title: String
     @Persisted var dateCreated: Date = Date()
     @Persisted var lastUpdated: Date = Date()

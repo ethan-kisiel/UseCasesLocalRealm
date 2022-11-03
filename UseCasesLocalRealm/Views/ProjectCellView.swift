@@ -35,7 +35,7 @@ struct ProjectCellView: View
                     {
                         if trashIsEnabled
                         {
-                            ProjectManager.shared.deleteProject(project)
+                            $projects.remove(project)
                         }
                     }
 

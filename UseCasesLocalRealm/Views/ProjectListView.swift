@@ -48,7 +48,7 @@ struct ProjectListView: View
                     {
                         index in
                         // delete project at current index
-                        ProjectManager.shared.deleteProject(userProjects[index])
+                        $projectResults.remove(userProjects[index])
                     }
                 }
             }.listStyle(.plain)

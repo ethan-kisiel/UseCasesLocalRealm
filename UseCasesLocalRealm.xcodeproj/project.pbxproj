@@ -35,6 +35,7 @@
 		88672AC7287CF4A5009129DD /* UserIdHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88672AC6287CF4A5009129DD /* UserIdHelper.swift */; };
 		88672ACC287CF7AC009129DD /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88672ACB287CF7AC009129DD /* Extensions.swift */; };
 		88A29E3D28BD11580068799C /* CategoryDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A29E3C28BD11580068799C /* CategoryDetailsView.swift */; };
+		88B9EE7828D8C644000A7246 /* BaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B9EE7728D8C644000A7246 /* BaseModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +65,7 @@
 		88672AC6287CF4A5009129DD /* UserIdHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserIdHelper.swift; sourceTree = "<group>"; };
 		88672ACB287CF7AC009129DD /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		88A29E3C28BD11580068799C /* CategoryDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryDetailsView.swift; sourceTree = "<group>"; };
+		88B9EE7728D8C644000A7246 /* BaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,6 +150,7 @@
 				8805F6192877826C000DE99F /* UseCase.swift */,
 				8805F6242878ED61000DE99F /* Step.swift */,
 				881AFB5E2891C4A400E5025E /* Category.swift */,
+				88B9EE7728D8C644000A7246 /* BaseModel.swift */,
 			);
 			path = DatabaseModels;
 			sourceTree = "<group>";
@@ -261,6 +264,7 @@
 				88672AC4287C95DD009129DD /* StepCellView.swift in Sources */,
 				88672AC7287CF4A5009129DD /* UserIdHelper.swift in Sources */,
 				8805F61228776F48000DE99F /* LocalRealmManager.swift in Sources */,
+				88B9EE7828D8C644000A7246 /* BaseModel.swift in Sources */,
 				8805F6252878ED61000DE99F /* Step.swift in Sources */,
 				881AFBA828A5849B00E5025E /* CategoryCellView.swift in Sources */,
 				88672AB52879143F009129DD /* ProjectsView.swift in Sources */,

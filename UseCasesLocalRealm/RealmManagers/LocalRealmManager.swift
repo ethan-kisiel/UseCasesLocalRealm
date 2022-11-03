@@ -9,7 +9,21 @@
 
 import Foundation
 import RealmSwift
-
+import Realm
+class RealmManager
+{
+    static let shared = RealmManager()
+    
+    let localRealm = try! Realm()
+    func addEntity<T: RealmSwiftObject>(_ entity: T)
+    {
+        
+        try? localRealm.write
+        {
+            localRealm.add(entity)
+        }
+    }
+}
 // MARK: PROJECT MANAGER
 class ProjectManager
 {

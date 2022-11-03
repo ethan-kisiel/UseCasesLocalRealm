@@ -74,7 +74,7 @@ struct ProjectDetailsView: View
         Spacer()
         CategoryListView(project: project)
         Spacer()
-            .navigationTitle("(Project) " + project.title.shorten(by: DISP_SHORT))
+            .navigationTitle("project.title.shorten(by: DISP_SHORT)")
             .navigationBarTitleDisplayMode(.inline)
     }
 }
