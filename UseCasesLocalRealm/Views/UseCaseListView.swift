@@ -15,23 +15,23 @@ enum Sections: String, CaseIterable
 
 struct UseCaseListView: View
 {
-    // takes project for filter query purposes
-    @State var project: Project
+    // takes category for filter query purposes
+    @State var category: Category
     @ObservedResults(UseCase.self) var useCases: Results<UseCase>
-    var projectUseCases: [UseCase]
+    var categoryUseCases: Results<UseCase>
     {
         // filter observed results to get only project cases
-        return useCases.filter { $0.underProject == project._id }
+        return useCases.where { $0.parentCategory._id == category._id }
     }
 
-    var completeUseCases: [UseCase]
+    var completeUseCases: Results<UseCase>
     {
-        return projectUseCases.filter { $0.isComplete == true }
+        return categoryUseCases.where { $0.isComplete == true }
     }
 
-    var incompleteUseCases: [UseCase]
+    var incompleteUseCases: Results<UseCase>
     {
-        return projectUseCases.filter { $0.isComplete == false }
+        return categoryUseCases.where { $0.isComplete == false }
     }
 
     var body: some View
@@ -43,6 +43,7 @@ struct UseCaseListView: View
                 section in
                 let filteredCases = section == .incomplete ? incompleteUseCases : completeUseCases
                 Spacer()
+                
                 Section
                 {
                     if filteredCases.isEmpty
@@ -64,7 +65,8 @@ struct UseCaseListView: View
                                 .fontWeight(.semibold)
                                 .opacity(0.5)
                         }
-                        ForEach(filteredCases, id: \._id)
+                        
+                        ForEach(filteredCases, id: \.self)
                         {
                             useCase in
                             UseCaseCellView(useCase: useCase)
@@ -75,7 +77,7 @@ struct UseCaseListView: View
                             indexSet.forEach
                             {
                                 index in
-                                UseCaseManager.shared.deleteUseCase(useCase: filteredCases[index])
+                                UseCaseManager.shared.deleteUseCase(filteredCases[index])
                             }
                         }
                     }
@@ -91,7 +93,7 @@ struct UseCasesListView_Previews: PreviewProvider
 {
     static var previews: some View
     {
-        let project: Project = Project()
-        UseCaseListView(project: project)
+        let category: Category = Category()
+        UseCaseListView(category: category)
     }
 }

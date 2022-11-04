@@ -14,6 +14,7 @@ struct ProjectListView: View
     @ObservedResults(Project.self) var projectResults: Results<Project>
     var userProjects: [Project]
     {
+        
         return projectResults.filter { $0.createdBy == userId }
     }
 
@@ -25,7 +26,7 @@ struct ProjectListView: View
         // looped through and presented as a ProjectCellView in the loop.
         // sliding to delete will cause the element at the current index to
         // be deleted using the ProjectManager.
-
+        
         if userProjects.isEmpty
         {
             Text("No projects to display.")
@@ -34,6 +35,7 @@ struct ProjectListView: View
         {
             List
             {
+                // sort by category
                 ForEach(userProjects, id: \._id)
                 {
                     project in
@@ -46,7 +48,7 @@ struct ProjectListView: View
                     {
                         index in
                         // delete project at current index
-                        ProjectManager.shared.deleteProject(userProjects[index])
+                        $projectResults.remove(userProjects[index])
                     }
                 }
             }.listStyle(.plain)

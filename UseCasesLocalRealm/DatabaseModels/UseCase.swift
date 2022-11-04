@@ -8,11 +8,9 @@
 import Foundation
 import RealmSwift
 
-
 class UseCase: Object, Identifiable
 {
     @Persisted(primaryKey: true) var _id: ObjectId
-    @Persisted var underProject: ObjectId
     @Persisted var caseId: String = EMPTY_STRING
     @Persisted var title: String
     @Persisted var dateCreated: Date = Date()
@@ -21,11 +19,11 @@ class UseCase: Object, Identifiable
     @Persisted var isComplete: Bool = false
     @Persisted var steps: List<Step> = List<Step>()
     
-    convenience init(title: String, projectId: ObjectId, priority: Priority)
+    @Persisted(originProperty: "useCases") var parentCategory: LinkingObjects<Category>
+    
+    convenience init(title: String, priority: Priority)
     {
-        // underProject takes a project's _id: ObjectId as the projectId parameter
         self.init()
-        self.underProject = projectId
         self.title = title
         self.priority = priority
     }

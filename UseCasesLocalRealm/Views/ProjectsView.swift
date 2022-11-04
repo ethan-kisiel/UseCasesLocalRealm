@@ -50,7 +50,7 @@ struct ProjectsView: View
                         {
                             project = Project(title: title, projectId: projectId)
 
-                            ProjectManager.shared.addProject(project: project!)
+                            $projects.append(project!)
 
                             title = EMPTY_STRING
                             projectId = EMPTY_STRING

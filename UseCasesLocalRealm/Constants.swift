@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import RealmSwift
 
 let EMPTY_STRING: String = ""
 let USER_ID_STRING: String = "UserId"
@@ -19,7 +18,7 @@ let LESS_ICON: String = "minus.circle"
 
 // character amount to shorten display title to if display title > DT_SHORT
 let DISP_SHORT: Int = 10
-enum Priority: String, CaseIterable, PersistableEnum
+enum Priority: String, CaseIterable
 {
     case low = "Low"
     case medium = "Medium"

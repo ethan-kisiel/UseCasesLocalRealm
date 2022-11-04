@@ -18,7 +18,7 @@ class Project: Object, Identifiable
     @Persisted var dateCreated: Date = Date()
     @Persisted var lastUpdated: Date = Date()
     
-    @Persisted var useCases: List<UseCase> = List<UseCase>()
+    @Persisted var categories: List<Category> = List<Category>()
     
     convenience init(title: String, projectId: String)
     {

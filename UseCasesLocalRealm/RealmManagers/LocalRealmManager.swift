@@ -9,7 +9,22 @@
 
 import Foundation
 import RealmSwift
-
+import Realm
+class RealmManager
+{
+    static let shared = RealmManager()
+    
+    let localRealm = try! Realm()
+    func addEntity<T: RealmSwiftObject>(_ entity: T)
+    {
+        
+        try? localRealm.write
+        {
+            localRealm.add(entity)
+        }
+    }
+}
+// MARK: PROJECT MANAGER
 class ProjectManager
 {
     static let shared = ProjectManager()
@@ -34,11 +49,11 @@ class ProjectManager
 
         if let projectToDelete = localRealm.object(ofType: Project.self, forPrimaryKey: project._id)
         {
-            if !projectToDelete.useCases.isEmpty
+            if !projectToDelete.categories.isEmpty
             {
-                for useCase in projectToDelete.useCases
+                for category in projectToDelete.categories
                 {
-                    UseCaseManager.shared.deleteUseCase(useCase: useCase)
+                    CategoryManager.shared.deleteCategory(category)
                 }
             }
             try? localRealm.write
@@ -47,7 +62,18 @@ class ProjectManager
             }
         }
     }
-
+    
+    func projectLastUpdated(project: Project)
+    {
+        if let projectToUpdate = localRealm.object(ofType: Project.self, forPrimaryKey: project._id)
+        {
+            try? localRealm.write
+            {
+                projectToUpdate.lastUpdated = Date()
+            }
+        }
+    }
+    
     func getProjectsByUID(userId: String) -> Results<Project>
     {
         // retrieve locally stored project by given userId
@@ -60,32 +86,78 @@ class ProjectManager
         return userProjects
     }
 }
+// MARK: CATEGORY MANAGER
+class CategoryManager
+{
+    static let shared = CategoryManager()
+    let localRealm = try! Realm()
+    
+    func addCategory(project: Project, category: Category)
+    {
+        if let targetProject = localRealm.object(ofType: Project.self, forPrimaryKey: project._id)
+        {
+            try? localRealm.write
+            {
+                targetProject.categories.append(category)
+                // needs to use lastUpdatedFunction
+                //targetProject.lastUpdated = Date()
+            }
+        }
+    }
+    
+    func deleteCategory(_ category: Category)
+    {
+        if let targetCategory = localRealm.object(ofType: Category.self, forPrimaryKey: category._id)
+        {
+            if !targetCategory.useCases.isEmpty
+            {
+                for useCase in targetCategory.useCases
+                {
+                    UseCaseManager.shared.deleteUseCase(useCase)
+                }
+            }
+            try? localRealm.write
+            {
+                localRealm.delete(targetCategory)
+            }
+        }
+    }
+}
 
+
+// MARK: USE CASE MANAGER
 class UseCaseManager
 {
     static let shared = UseCaseManager()
 
     let localRealm = try! Realm()
-
-    func addUseCase(project: Project, useCase: UseCase)
+    
+    func addUseCase(category: Category, useCase: UseCase)
     {
         // finds the target project from the given project._id and
         // appends the given useCase to the given project
         // in the local realm database
         
-        let targetProject = localRealm.object(ofType: Project.self, forPrimaryKey: project._id)
-        try? localRealm.write
+        if let parentCategory = localRealm.object(ofType: Category.self, forPrimaryKey: category._id)
         {
-            targetProject?.useCases.append(useCase)
+            try? localRealm.write
+            {
+                parentCategory.useCases.append(useCase)
+                // needs to use lastUpdatedFunction
+                //targetProject.lastUpdated = Date()
+            }
         }
     }
 
-    func deleteUseCase(useCase: UseCase)
+    func deleteUseCase(_ useCase: UseCase)
     {
         // Same implimentation as ProjectManager.deleteProject()
         
         if let caseToDelete = localRealm.object(ofType: UseCase.self, forPrimaryKey: useCase._id)
         {
+            // caseToDelete.underProject.lastUpdated = Date()
+            // ^ use after fixing  parent - child relationship
+            
             if !caseToDelete.steps.isEmpty
             {
                 for step in caseToDelete.steps
@@ -99,12 +171,11 @@ class UseCaseManager
             }
         }
     }
-
+    
     func toggleUseCaseCompleteness(useCase: UseCase)
     {
         // this function simply toggles the useCase.isComplete boolean within
         // the local realm db
-        
         if let useCaseToUpdate = localRealm.object(ofType: UseCase.self, forPrimaryKey: useCase._id)
         {
             try? localRealm.write
@@ -114,7 +185,7 @@ class UseCaseManager
         }
     }
 }
-
+// MARK: STEP MANAGER
 class StepManager
 {
     static let shared = StepManager()
@@ -124,13 +195,16 @@ class StepManager
     func addStep(useCase: UseCase, step: Step)
     {
         // Same implimentation as ProjectManager.addUseCase
-        let targetUseCase = localRealm.object(ofType: UseCase.self, forPrimaryKey: useCase._id)
-        try? localRealm.write
+        if let targetUseCase = localRealm.object(ofType: UseCase.self, forPrimaryKey: useCase._id)
         {
-            targetUseCase?.steps.append(step)
+            try? localRealm.write
+            {
+                targetUseCase.steps.append(step)
+                targetUseCase.lastUpdated = Date()
+            }
         }
     }
-
+    
     func deleteStep(step: Step)
     {
         // Same implimentation as ProjectManager.deleteProject()
@@ -140,6 +214,24 @@ class StepManager
             try? localRealm.write
             {
                 localRealm.delete(stepToDelete)
+            }
+        }
+    }
+    
+    func stepLastUpdated(step: Step)
+    {
+        // update given step's lastUpdated property to the current date
+        // then make call to UseCaseManager.shared to update the
+        // given step's parentUseCase's lastUpdated property
+        if let stepToUpdate = localRealm.object(ofType: Step.self, forPrimaryKey: step._id)
+        {
+            try? localRealm.write
+            {
+                stepToUpdate.lastUpdated = Date()
+                if let useCase = stepToUpdate.parentUseCase[0]
+                {
+                    //UseCaseManager.shared.useCaseLastUpdated(useCase: useCase)
+                }
             }
         }
     }
